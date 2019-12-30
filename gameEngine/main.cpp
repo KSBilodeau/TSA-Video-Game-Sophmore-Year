@@ -7,9 +7,10 @@
 //
 
 #include <iostream>
+#include <SDL.h>
 
 int main(int argc, const char * argv[]) {
-    // insert code here...
-    std::cout << "Hello, World!\n";
+    SDL_Rect rect {0, 0, 100, 100};
+    printf("x: %i\n", rect.x);
     return 0;
 }
