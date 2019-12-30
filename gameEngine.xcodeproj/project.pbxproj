@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		86C3013023BA993E007313D2 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86C3012F23BA993E007313D2 /* main.cpp */; };
+		86C9193C23BAA43C00D86191 /* textureWrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86C9193A23BAA43C00D86191 /* textureWrapper.cpp */; };
+		86C9193F23BAA45200D86191 /* animatedTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86C9193D23BAA45200D86191 /* animatedTexture.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -26,6 +28,10 @@
 		86C3012C23BA993E007313D2 /* gameEngine */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = gameEngine; sourceTree = BUILT_PRODUCTS_DIR; };
 		86C3012F23BA993E007313D2 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		86C9193923BA9F0400D86191 /* main.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = main.hpp; sourceTree = "<group>"; };
+		86C9193A23BAA43C00D86191 /* textureWrapper.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = textureWrapper.cpp; sourceTree = "<group>"; };
+		86C9193B23BAA43C00D86191 /* textureWrapper.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = textureWrapper.hpp; sourceTree = "<group>"; };
+		86C9193D23BAA45200D86191 /* animatedTexture.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = animatedTexture.cpp; sourceTree = "<group>"; };
+		86C9193E23BAA45200D86191 /* animatedTexture.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = animatedTexture.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,10 +64,22 @@
 		86C3012E23BA993E007313D2 /* gameEngine */ = {
 			isa = PBXGroup;
 			children = (
+				86C9194023BAA45900D86191 /* textureClasses */,
 				86C3012F23BA993E007313D2 /* main.cpp */,
 				86C9193923BA9F0400D86191 /* main.hpp */,
 			);
 			path = gameEngine;
+			sourceTree = "<group>";
+		};
+		86C9194023BAA45900D86191 /* textureClasses */ = {
+			isa = PBXGroup;
+			children = (
+				86C9193A23BAA43C00D86191 /* textureWrapper.cpp */,
+				86C9193B23BAA43C00D86191 /* textureWrapper.hpp */,
+				86C9193D23BAA45200D86191 /* animatedTexture.cpp */,
+				86C9193E23BAA45200D86191 /* animatedTexture.hpp */,
+			);
+			name = textureClasses;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -122,6 +140,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				86C3013023BA993E007313D2 /* main.cpp in Sources */,
+				86C9193F23BAA45200D86191 /* animatedTexture.cpp in Sources */,
+				86C9193C23BAA43C00D86191 /* textureWrapper.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
