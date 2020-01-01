@@ -9,18 +9,26 @@
 /* Begin PBXBuildFile section */
 		86C3013023BA993E007313D2 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86C3012F23BA993E007313D2 /* main.cpp */; };
 		86C9193C23BAA43C00D86191 /* textureWrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86C9193A23BAA43C00D86191 /* textureWrapper.cpp */; };
-		86C9193F23BAA45200D86191 /* animatedTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86C9193D23BAA45200D86191 /* animatedTexture.cpp */; };
+		86C9195723BAB77300D86191 /* sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86C9195323BAB77300D86191 /* sprite.cpp */; };
+		86C9195823BAB77300D86191 /* spritesheet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86C9195423BAB77300D86191 /* spritesheet.cpp */; };
+		86C9195D23BAB7AE00D86191 /* gui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86C9195B23BAB7AE00D86191 /* gui.cpp */; };
+		86C9196123BBFB2E00D86191 /* gameObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86C9195F23BBFB2E00D86191 /* gameObject.cpp */; };
+		86C9196423BBFD4500D86191 /* textureHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86C9196223BBFD4500D86191 /* textureHandler.cpp */; };
+		86C9196723BC04AA00D86191 /* background.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 86C9196623BC048E00D86191 /* background.png */; };
+		86C9196A23BC0EB400D86191 /* clock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86C9196823BC0EB400D86191 /* clock.cpp */; };
+		86C9196F23BC4F2600D86191 /* guiButtons.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86C9196D23BC4F2600D86191 /* guiButtons.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		86C3012A23BA993E007313D2 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
+			buildActionMask = 12;
+			dstPath = "";
+			dstSubfolderSpec = 16;
 			files = (
+				86C9196723BC04AA00D86191 /* background.png in CopyFiles */,
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
@@ -30,8 +38,21 @@
 		86C9193923BA9F0400D86191 /* main.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = main.hpp; sourceTree = "<group>"; };
 		86C9193A23BAA43C00D86191 /* textureWrapper.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = textureWrapper.cpp; sourceTree = "<group>"; };
 		86C9193B23BAA43C00D86191 /* textureWrapper.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = textureWrapper.hpp; sourceTree = "<group>"; };
-		86C9193D23BAA45200D86191 /* animatedTexture.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = animatedTexture.cpp; sourceTree = "<group>"; };
-		86C9193E23BAA45200D86191 /* animatedTexture.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = animatedTexture.hpp; sourceTree = "<group>"; };
+		86C9195323BAB77300D86191 /* sprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sprite.cpp; sourceTree = "<group>"; };
+		86C9195423BAB77300D86191 /* spritesheet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = spritesheet.cpp; sourceTree = "<group>"; };
+		86C9195523BAB77300D86191 /* sprite.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = sprite.hpp; sourceTree = "<group>"; };
+		86C9195623BAB77300D86191 /* spritesheet.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = spritesheet.hpp; sourceTree = "<group>"; };
+		86C9195B23BAB7AE00D86191 /* gui.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = gui.cpp; sourceTree = "<group>"; };
+		86C9195C23BAB7AE00D86191 /* gui.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = gui.hpp; sourceTree = "<group>"; };
+		86C9195F23BBFB2E00D86191 /* gameObject.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = gameObject.cpp; sourceTree = "<group>"; };
+		86C9196023BBFB2E00D86191 /* gameObject.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = gameObject.hpp; sourceTree = "<group>"; };
+		86C9196223BBFD4500D86191 /* textureHandler.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = textureHandler.cpp; sourceTree = "<group>"; };
+		86C9196323BBFD4500D86191 /* textureHandler.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = textureHandler.hpp; sourceTree = "<group>"; };
+		86C9196623BC048E00D86191 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
+		86C9196823BC0EB400D86191 /* clock.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = clock.cpp; sourceTree = "<group>"; };
+		86C9196923BC0EB400D86191 /* clock.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = clock.hpp; sourceTree = "<group>"; };
+		86C9196D23BC4F2600D86191 /* guiButtons.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = guiButtons.cpp; sourceTree = "<group>"; };
+		86C9196E23BC4F2600D86191 /* guiButtons.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = guiButtons.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,6 +69,7 @@
 		86C3012323BA993E007313D2 = {
 			isa = PBXGroup;
 			children = (
+				86C9196523BC046500D86191 /* resources */,
 				86C3012E23BA993E007313D2 /* gameEngine */,
 				86C3012D23BA993E007313D2 /* Products */,
 			);
@@ -64,9 +86,12 @@
 		86C3012E23BA993E007313D2 /* gameEngine */ = {
 			isa = PBXGroup;
 			children = (
+				86C9195E23BBFB0800D86191 /* gameObjects */,
 				86C9194023BAA45900D86191 /* textureClasses */,
 				86C3012F23BA993E007313D2 /* main.cpp */,
 				86C9193923BA9F0400D86191 /* main.hpp */,
+				86C9196823BC0EB400D86191 /* clock.cpp */,
+				86C9196923BC0EB400D86191 /* clock.hpp */,
 			);
 			path = gameEngine;
 			sourceTree = "<group>";
@@ -76,10 +101,51 @@
 			children = (
 				86C9193A23BAA43C00D86191 /* textureWrapper.cpp */,
 				86C9193B23BAA43C00D86191 /* textureWrapper.hpp */,
-				86C9193D23BAA45200D86191 /* animatedTexture.cpp */,
-				86C9193E23BAA45200D86191 /* animatedTexture.hpp */,
+				86C9196223BBFD4500D86191 /* textureHandler.cpp */,
+				86C9196323BBFD4500D86191 /* textureHandler.hpp */,
 			);
 			name = textureClasses;
+			sourceTree = "<group>";
+		};
+		86C9194823BAB6DD00D86191 /* spriteClasses */ = {
+			isa = PBXGroup;
+			children = (
+				86C9195323BAB77300D86191 /* sprite.cpp */,
+				86C9195523BAB77300D86191 /* sprite.hpp */,
+				86C9195423BAB77300D86191 /* spritesheet.cpp */,
+				86C9195623BAB77300D86191 /* spritesheet.hpp */,
+			);
+			name = spriteClasses;
+			sourceTree = "<group>";
+		};
+		86C9195A23BAB79900D86191 /* guiClasses */ = {
+			isa = PBXGroup;
+			children = (
+				86C9195B23BAB7AE00D86191 /* gui.cpp */,
+				86C9195C23BAB7AE00D86191 /* gui.hpp */,
+				86C9196D23BC4F2600D86191 /* guiButtons.cpp */,
+				86C9196E23BC4F2600D86191 /* guiButtons.hpp */,
+			);
+			name = guiClasses;
+			sourceTree = "<group>";
+		};
+		86C9195E23BBFB0800D86191 /* gameObjects */ = {
+			isa = PBXGroup;
+			children = (
+				86C9195F23BBFB2E00D86191 /* gameObject.cpp */,
+				86C9196023BBFB2E00D86191 /* gameObject.hpp */,
+				86C9195A23BAB79900D86191 /* guiClasses */,
+				86C9194823BAB6DD00D86191 /* spriteClasses */,
+			);
+			name = gameObjects;
+			sourceTree = "<group>";
+		};
+		86C9196523BC046500D86191 /* resources */ = {
+			isa = PBXGroup;
+			children = (
+				86C9196623BC048E00D86191 /* background.png */,
+			);
+			path = resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -139,9 +205,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				86C9195823BAB77300D86191 /* spritesheet.cpp in Sources */,
 				86C3013023BA993E007313D2 /* main.cpp in Sources */,
-				86C9193F23BAA45200D86191 /* animatedTexture.cpp in Sources */,
 				86C9193C23BAA43C00D86191 /* textureWrapper.cpp in Sources */,
+				86C9196423BBFD4500D86191 /* textureHandler.cpp in Sources */,
+				86C9195723BAB77300D86191 /* sprite.cpp in Sources */,
+				86C9196123BBFB2E00D86191 /* gameObject.cpp in Sources */,
+				86C9196F23BC4F2600D86191 /* guiButtons.cpp in Sources */,
+				86C9196A23BC0EB400D86191 /* clock.cpp in Sources */,
+				86C9195D23BAB7AE00D86191 /* gui.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -12,6 +12,20 @@
 #include <SDL_ttf.h>
 
 #include "main.hpp"
+#include "sprite.hpp"
+#include "textureWrapper.hpp"
+#include "textureHandler.hpp"
+#include "clock.hpp"
+
+SDL_Window* gWindow;
+
+SDL_Renderer* gRenderer;
+
+TTF_Font* gFont;
+
+TextureRegister textureRegistry;
+
+SDL_Rect camera;
 
 bool init()
 {
@@ -71,21 +85,89 @@ bool init()
     return success;
 }
 
+KTexture testTexture;
 // TODO: Add non-manual way of importing files
 bool loadMedia()
 {
     // Media import success flag
     bool success = true;
     
+    if (!testTexture.loadFromFile("background.png", 1))
+    {
+        printf("Test texture could not be loaded!\n");
+        success = false;
+    }
+    else
+        textureRegistry.registerTexture(0, &testTexture);
+    
     return success;
 }
 
 void close()
 {
-    
+    // Free all textures that have not already been freed
+    textureRegistry.freeAll();
 }
 
 int main(int argc, const char * argv[])
 {
+    // Main loop flag
+    bool isRunning = true;
+    
+    // Event handler
+    SDL_Event event;
+    
+    // Fps ticks
+    KClock fpsTimer;
+    
+    // FPS cap timer
+    KClock capTimer;
+    
+    if (!init())
+        printf("Failed to initialize!\n");
+    else if (!loadMedia())
+        printf("Failed to load media!\n");
+    
+    Sprite sprite;
+    SDL_Rect rect {0, 0, 100, 100};
+    sprite.createSprite(0, rect, true);
+    
+    int countedFrames = 0;
+    fpsTimer.start();
+    
+    while (isRunning)
+    {
+        capTimer.start();
+        
+        while (SDL_PollEvent(&event))
+        {
+            if (event.type == SDL_QUIT)
+                isRunning = false;
+        }
+        
+        sprite.update();
+        
+        float avgFPS = countedFrames / (fpsTimer.getTicks() / 1000.0f);
+        if (avgFPS > 2000000)
+            avgFPS = 0;
+        
+        SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+        SDL_RenderClear(gRenderer);
+        
+        sprite.render();
+        
+        SDL_RenderPresent(gRenderer);
+        SDL_RenderClear(gRenderer);
+        
+        countedFrames++;
+        
+        int frameTicks = capTimer.getTicks();
+        if (frameTicks < 1000 / 60)
+            SDL_Delay((1000 / 60) - frameTicks);
+        
+        std::cout << avgFPS << '\n';
+    }
+    
+    close();
     return 0;
 }

@@ -9,6 +9,10 @@
 #ifndef main_hpp
 #define main_hpp
 
+#include <SDL_ttf.h>
+
+#include "textureHandler.hpp"
+
 // Basic screen dimensions for window setup
 const int SCREEN_WIDTH = 600;
 const int SCREEN_HEIGHT = 600;
@@ -25,6 +29,15 @@ extern SDL_Window* gWindow;
 
 // Renderer for engine window
 extern SDL_Renderer* gRenderer;
+
+// Global font that will be used for the game
+extern TTF_Font* gFont;
+
+// Handles textures for the whole game
+extern TextureRegister textureRegistry;
+
+// The games camera rectangle
+extern SDL_Rect camera;
 
 // Initializes libraries and game variables
 bool init();
