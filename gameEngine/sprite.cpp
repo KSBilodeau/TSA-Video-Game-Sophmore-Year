@@ -6,6 +6,7 @@
 //  Copyright © 2019 Keegan Bilodeau. All rights reserved.
 //
 #include <SDL.h>
+#include <iostream>
 
 #include "sprite.hpp"
 #include "main.hpp"
@@ -20,8 +21,6 @@ Sprite::Sprite()
 
 Sprite::~Sprite()
 {
-    mTexture = nullptr;
-    
     mFixed = false;
     mRectangle = {0, 0, 0, 0};
 }
@@ -34,6 +33,7 @@ void Sprite::free()
 void Sprite::createSprite(int textureID, SDL_Rect &rect, bool fixed)
 {
     mTexture = textureRegistry.requestAccess(textureID);
+    std::cout << mTexture.use_count() << " " << textureRegistry.requestAccess(textureID).use_count() << "\n";
     
     mFixed = fixed;
     mRectangle = rect;
@@ -46,7 +46,7 @@ void Sprite::render()
 
 void Sprite::update()
 {
-    mRectangle.x++;
+    
 }
 
 bool Sprite::handleMouseClick(SDL_Event event)

@@ -44,7 +44,7 @@ public:
     
 private:
     // Pointer to base texture
-    KTexture* mTexture;
+    std::shared_ptr<KTexture> mTexture;
     
     // Fixed flag
     bool mFixed;

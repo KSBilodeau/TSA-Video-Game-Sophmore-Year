@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "985745A8-21B2-41C2-B2E5-08772C8F116D"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "38752028-124D-4883-A68A-F0EF80F6332E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "gameEngine/textureWrapper.cpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "21"
+            endingLineNumber = "21"
+            landmarkName = "KTexture::~KTexture()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "38752028-124D-4883-A68A-F0EF80F6332E - 163c8357abd4c1db"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "KTexture::~KTexture()"
+                  moduleName = "gameEngine"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ksbilodeau/Desktop/Xcode%20Projects/gameEngine/gameEngine/textureWrapper.cpp"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "23"
+                  endingLineNumber = "23"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  uuid = "38752028-124D-4883-A68A-F0EF80F6332E - 163c8357abd4c1db"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "KTexture::~KTexture()"
+                  moduleName = "gameEngine"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ksbilodeau/Desktop/Xcode%20Projects/gameEngine/gameEngine/textureWrapper.cpp"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "22"
+                  endingLineNumber = "22"
+                  offsetFromSymbolStart = "16">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "34CAF151-F0B7-40B9-A8D1-FBCB6DA6BA2E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "gameEngine/sprite.cpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "22"
+            endingLineNumber = "22"
+            landmarkName = "Sprite::~Sprite()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "34CAF151-F0B7-40B9-A8D1-FBCB6DA6BA2E - b63a5cd3ce05e636"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Sprite::~Sprite()"
+                  moduleName = "gameEngine"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ksbilodeau/Desktop/Xcode%20Projects/gameEngine/gameEngine/sprite.cpp"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "23"
+                  endingLineNumber = "23"
+                  offsetFromSymbolStart = "27">
+               </Location>
+               <Location
+                  uuid = "34CAF151-F0B7-40B9-A8D1-FBCB6DA6BA2E - b63a5cd3ce05e636"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Sprite::~Sprite()"
+                  moduleName = "gameEngine"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ksbilodeau/Desktop/Xcode%20Projects/gameEngine/gameEngine/sprite.cpp"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "23"
+                  endingLineNumber = "23"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  uuid = "34CAF151-F0B7-40B9-A8D1-FBCB6DA6BA2E - b63a5cd3ce05e636"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Sprite::~Sprite()"
+                  moduleName = "gameEngine"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ksbilodeau/Desktop/Xcode%20Projects/gameEngine/gameEngine/sprite.cpp"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "23"
+                  endingLineNumber = "23"
+                  offsetFromSymbolStart = "20">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2287F4C6-74D0-4820-830E-392AF2BD71D3"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "gameEngine/main.cpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "102"
+            endingLineNumber = "102"
+            landmarkName = "loadMedia()"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

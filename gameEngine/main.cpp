@@ -98,7 +98,9 @@ bool loadMedia()
         success = false;
     }
     else
-        textureRegistry.registerTexture(0, &testTexture);
+    {
+        textureRegistry.registerTexture(0, testTexture);
+    }
     
     return success;
 }
@@ -145,8 +147,6 @@ int main(int argc, const char * argv[])
                 isRunning = false;
         }
         
-        sprite.update();
-        
         float avgFPS = countedFrames / (fpsTimer.getTicks() / 1000.0f);
         if (avgFPS > 2000000)
             avgFPS = 0;
@@ -154,7 +154,9 @@ int main(int argc, const char * argv[])
         SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
         SDL_RenderClear(gRenderer);
         
-        sprite.render();
+        textureRegistry.renderTexture(0);
+//        testTexture.render(0, 0, true);
+//        sprite.render();
         
         SDL_RenderPresent(gRenderer);
         SDL_RenderClear(gRenderer);
@@ -165,7 +167,7 @@ int main(int argc, const char * argv[])
         if (frameTicks < 1000 / 60)
             SDL_Delay((1000 / 60) - frameTicks);
         
-        std::cout << avgFPS << '\n';
+//        std::cout << avgFPS << '\n';
     }
     
     close();

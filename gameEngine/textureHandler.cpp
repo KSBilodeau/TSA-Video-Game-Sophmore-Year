@@ -20,59 +20,65 @@ TextureRegister::~TextureRegister()
 
 void TextureRegister::freeAll()
 {
-    for (std::pair<int, KTexture*> texture : textures)
-    {
+    for (std::pair<int, std::shared_ptr<KTexture>> texture : textures)
         texture.second->free();
-        
-        textureRegistry.at(texture.first) = 0;
-    }
     
     for (int i = 0; i < textures.size(); i++)
     {
         textures.erase(i);
-        textureRegistry.erase(i);
+        textureRegistry.erase(textureRegistry.begin() + i);
     }
 }
 
 void TextureRegister::free(int textureID)
 {
-    if (textureRegistry.at(textureID) > 1)
-    {
+    if (textures.at(textureID).use_count() > 1)
         printf("Texture cannot be freed: it is being used by another object!\n");
-        textureRegistry.at(textureID)--;
-    }
     else
     {
-        textureRegistry.at(textureID) = 0;
-        textureRegistry.erase(textureID);
+        textureRegistry.erase(textureRegistry.begin() + textureID);
         
         textures.at(textureID)->free();
         textures.erase(textureID);
     }
 }
 
-void TextureRegister::registerTexture(int id, KTexture *texture)
+void TextureRegister::registerTexture(int id, KTexture baseTexture)
 {
-    if (textures.count(id) == 0)
+    std::shared_ptr<KTexture> texture = std::make_shared<KTexture>(baseTexture);
+    
+    if (!textureRegistry.empty())
     {
         textures.insert(std::make_pair(id, texture));
-        textureRegistry.insert(std::make_pair(id, 1));
+        textureRegistry.push_back(baseTexture);
+    }
+    else if (textures.count(id) == 0)
+    {
+        textures.insert(std::make_pair(id, texture));
+        textureRegistry.push_back(baseTexture);
     }
     else
         printf("Texture has already been registered!  Request access instead.\n");
 }
 
-KTexture* TextureRegister::requestAccess(int textureID)
+const std::shared_ptr<KTexture> &TextureRegister::requestAccess(int textureID)
 {
     if (textures.count(textureID) == 0)
     {
         printf("Texture with id of %i has not been registered yet!\n", textureID);
-        return nullptr;
+        throw std::runtime_error("Access denied!\n");
     }
     else
-    {
-        textureRegistry.at(textureID)++;
         return textures.at(textureID);
-    }
+}
+
+void TextureRegister::renderTexture(int index)
+{
+    textureRegistry.at(index).render(0, 0, true);
+}
+
+KTexture TextureRegister::getTexture(int index)
+{
+    return textureRegistry.at(index);
 }
 

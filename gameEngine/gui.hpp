@@ -17,6 +17,7 @@
 
 class MainMenu : GameObject
 {
+public:
     // Initialize variables
     MainMenu();
     
@@ -42,7 +43,7 @@ private:
     KTexture* mTexture;
     
     // Coordinates
-    int x, y;
+    SDL_Rect mRectangle;
 };
 
 #endif /* gui_hpp */

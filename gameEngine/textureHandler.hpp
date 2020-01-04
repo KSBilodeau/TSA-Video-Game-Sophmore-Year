@@ -11,6 +11,8 @@
 
 #include <stdio.h>
 #include <map>
+#include <string>
+#include <vector>
 
 #include "textureWrapper.hpp"
 
@@ -30,17 +32,23 @@ public:
     void free(int textureID);
     
     // Register texture
-    void registerTexture(int id, KTexture* texture);
+    void registerTexture(int id, KTexture baseTexture);
     
     // Gives objects access to texture
-    KTexture* requestAccess(int textureID);
+    const std::shared_ptr<KTexture> &requestAccess(int textureID);
+    
+    void renderTexture(int index);
+    
+    KTexture getTexture(int index);
     
 private:
+    KTexture texture1;
+    
     // Maps all registered textures to their ids
-    std::map<int, KTexture*> textures;
+    std::map<int, std::shared_ptr<KTexture>> textures;
     
     // Maps textureIDs to the number of objects using it
-    std::map<int, int> textureRegistry;
+    std::vector<KTexture> textureRegistry;
 };
 
 #endif /* textureHandler_hpp */
