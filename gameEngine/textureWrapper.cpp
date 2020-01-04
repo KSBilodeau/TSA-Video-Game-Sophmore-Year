@@ -15,7 +15,22 @@
 
 KTexture::KTexture()
 {
+    mTexture = nullptr;
     
+    mWidth = 0;
+    mHeight = 0;
+    
+    mScale = 0;
+}
+
+KTexture::KTexture(const KTexture &oldObject)
+{
+    mTexture = oldObject.mTexture;
+    
+    mWidth = oldObject.mWidth;
+    mHeight = oldObject.mHeight;
+    
+    mScale = oldObject.mScale;
 }
 
 KTexture::~KTexture()

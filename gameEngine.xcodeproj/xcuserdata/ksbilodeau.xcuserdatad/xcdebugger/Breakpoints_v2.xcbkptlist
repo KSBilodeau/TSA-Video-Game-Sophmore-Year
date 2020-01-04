@@ -8,20 +8,20 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "38752028-124D-4883-A68A-F0EF80F6332E"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "gameEngine/textureWrapper.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "21"
-            endingLineNumber = "21"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
             landmarkName = "KTexture::~KTexture()"
             landmarkType = "7">
             <Locations>
                <Location
                   uuid = "38752028-124D-4883-A68A-F0EF80F6332E - 163c8357abd4c1db"
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "KTexture::~KTexture()"
@@ -36,7 +36,7 @@
                </Location>
                <Location
                   uuid = "38752028-124D-4883-A68A-F0EF80F6332E - 163c8357abd4c1db"
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "KTexture::~KTexture()"
@@ -119,7 +119,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "2287F4C6-74D0-4820-830E-392AF2BD71D3"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "gameEngine/main.cpp"
@@ -129,6 +129,54 @@
             endingLineNumber = "102"
             landmarkName = "loadMedia()"
             landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5601DAFE-AC64-49E7-B195-C7C9306B02AF"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "gameEngine/textureWrapper.cpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "26"
+            endingLineNumber = "26"
+            landmarkName = "KTexture::KTexture(oldObject)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "5601DAFE-AC64-49E7-B195-C7C9306B02AF - e6863d0ab3c2995a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "KTexture::KTexture(KTexture const&amp;)"
+                  moduleName = "gameEngine"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ksbilodeau/Desktop/Xcode%20Projects/gameEngine/gameEngine/textureWrapper.cpp"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "28"
+                  endingLineNumber = "28"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  uuid = "5601DAFE-AC64-49E7-B195-C7C9306B02AF - e6863d0ab3c2995a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "KTexture::KTexture(KTexture const&amp;)"
+                  moduleName = "gameEngine"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ksbilodeau/Desktop/Xcode%20Projects/gameEngine/gameEngine/textureWrapper.cpp"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "27"
+                  endingLineNumber = "27"
+                  offsetFromSymbolStart = "20">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

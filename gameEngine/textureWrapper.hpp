@@ -20,6 +20,9 @@ public:
     // Initialize variables
     KTexture();
     
+    // My beautiful copy constructor
+    KTexture(const KTexture &oldObject);
+    
     // Free hardware texture and variables
     ~KTexture();
     
