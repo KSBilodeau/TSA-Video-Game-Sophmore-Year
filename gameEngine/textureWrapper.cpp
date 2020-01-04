@@ -23,29 +23,8 @@ KTexture::KTexture()
     mScale = 0;
 }
 
-KTexture::KTexture(const KTexture &oldObject)
-{
-    mTexture = oldObject.mTexture;
-    
-    mWidth = oldObject.mWidth;
-    mHeight = oldObject.mHeight;
-    
-    mScale = oldObject.mScale;
-}
-
-KTexture::~KTexture()
-{
-    free();
-}
-
 void KTexture::free()
 {
-    if (mTexture != nullptr)
-    {
-        SDL_DestroyTexture(mTexture);
-        mTexture = nullptr;
-    }
-    
     mWidth = 0;
     mHeight = 0;
     
@@ -74,7 +53,7 @@ bool KTexture::loadFromFile(std::string path, double scale)
         SDL_SetColorKey(loadedSurface, SDL_TRUE, SDL_MapRGB(loadedSurface->format, 0xFF, 0, 0xDC));
         
         // Create texture from surface
-        mTexture = SDL_CreateTextureFromSurface(gRenderer, loadedSurface);
+        mTexture = std::shared_ptr<SDL_Texture>(SDL_CreateTextureFromSurface(gRenderer, loadedSurface), [](SDL_Texture* texture) {SDL_DestroyTexture(texture);});
         if (mTexture == nullptr)
         {
             printf("Unable to create texture from image at %s! SDL_image Error: %s\n", path.c_str(), IMG_GetError());
@@ -119,7 +98,7 @@ bool KTexture::loadFromString(std::string text, SDL_Color textColor)
         SDL_SetColorKey(loadedSurface, SDL_TRUE, SDL_MapRGB(loadedSurface->format, 0xFF, 0, 0xDC));
         
         // Create texture from surface
-        mTexture = SDL_CreateTextureFromSurface(gRenderer, loadedSurface);
+        mTexture = std::shared_ptr<SDL_Texture>(SDL_CreateTextureFromSurface(gRenderer, loadedSurface), [](SDL_Texture* texture) {SDL_DestroyTexture(texture);});
         if (mTexture == nullptr)
         {
             printf("Unable to create texture from rendered text! SDL_image Error: %s\n", IMG_GetError());
@@ -154,22 +133,22 @@ void KTexture::render(int x, int y, bool fixed, SDL_Rect* clipRect)
     renderQuad.w *= mScale;
     renderQuad.h *= mScale;
     
-    SDL_RenderCopy(gRenderer, mTexture, clipRect, &renderQuad);
+    SDL_RenderCopy(gRenderer, mTexture.get(), clipRect, &renderQuad);
 }
 
 void KTexture::setBlendMode(SDL_BlendMode blendMode)
 {
-    SDL_SetTextureBlendMode(mTexture, blendMode);
+    SDL_SetTextureBlendMode(mTexture.get(), blendMode);
 }
 
 void KTexture::modifyTextureColor(Uint8 red, Uint8 green, Uint8 blue)
 {
-    SDL_SetTextureColorMod(mTexture, red, green, blue);
+    SDL_SetTextureColorMod(mTexture.get(), red, green, blue);
 }
 
 void KTexture::modifyAlpha(Uint8 alpha)
 {
-    SDL_SetTextureAlphaMod(mTexture, alpha);
+    SDL_SetTextureAlphaMod(mTexture.get(), alpha);
 }
 
 void KTexture::modifyTextureScale(double scale)

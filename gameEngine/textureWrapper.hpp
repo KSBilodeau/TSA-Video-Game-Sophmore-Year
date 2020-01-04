@@ -20,11 +20,11 @@ public:
     // Initialize variables
     KTexture();
     
-    // My beautiful copy constructor
-    KTexture(const KTexture &oldObject);
-    
-    // Free hardware texture and variables
-    ~KTexture();
+//    // My beautiful copy constructor
+//    KTexture(const KTexture &oldObject);
+//    
+//    // Free hardware texture and variables
+//    ~KTexture();
     
     // Free textures and variables
     void free();
@@ -56,7 +56,7 @@ public:
     
 private:
     // The SDL texture being wrapped
-    SDL_Texture* mTexture;
+    std::shared_ptr<SDL_Texture> mTexture;
     
     // Texture dimensions
     int mWidth, mHeight;

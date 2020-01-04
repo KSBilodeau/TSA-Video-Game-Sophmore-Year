@@ -85,13 +85,13 @@ bool init()
     return success;
 }
 
-KTexture testTexture;
 // TODO: Add non-manual way of importing files
 bool loadMedia()
 {
     // Media import success flag
     bool success = true;
     
+    KTexture testTexture;
     if (!testTexture.loadFromFile("background.png", 1))
     {
         printf("Test texture could not be loaded!\n");
@@ -100,6 +100,16 @@ bool loadMedia()
     else
     {
         textureRegistry.registerTexture(0, testTexture);
+    }
+    
+    if (!testTexture.loadFromFile("sprites.png", 1))
+    {
+        printf("Test texture could not be loaded!\n");
+        success = false;
+    }
+    else
+    {
+        textureRegistry.registerTexture(1, testTexture);
     }
     
     return success;
@@ -155,6 +165,7 @@ int main(int argc, const char * argv[])
         SDL_RenderClear(gRenderer);
         
         textureRegistry.renderTexture(0);
+        textureRegistry.renderTexture(1);
 //        testTexture.render(0, 0, true);
 //        sprite.render();
         
