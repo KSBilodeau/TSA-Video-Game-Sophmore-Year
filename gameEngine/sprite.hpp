@@ -37,7 +37,7 @@ public:
     void update() override;
     
     // Handles mouse clicks on sprite
-    bool handleMouseClick(SDL_Event event) override;
+    bool handleMouseClick(SDL_Event &event) override;
     
     // Returns sprites dimensions
     SDL_Rect &getRectangle() override;

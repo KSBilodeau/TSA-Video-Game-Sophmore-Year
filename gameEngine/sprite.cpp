@@ -32,8 +32,9 @@ void Sprite::free()
 
 void Sprite::createSprite(int textureID, SDL_Rect &rect, bool fixed)
 {
-    mTexture = textureRegistry.requestAccess(textureID);
-    std::cout << mTexture.use_count() << " " << textureRegistry.requestAccess(textureID).use_count() << "\n";
+    mTexture = std::move(textureRegistry.requestAccess(textureID));
+    
+//    std::cout << mTexture.use_count() << " " << textureRegistry.requestAccess(textureID).use_count() << "\n";
     
     mFixed = fixed;
     mRectangle = rect;
@@ -49,7 +50,7 @@ void Sprite::update()
     
 }
 
-bool Sprite::handleMouseClick(SDL_Event event)
+bool Sprite::handleMouseClick(SDL_Event &event)
 {
     // Collision success flag
     bool success = true;

@@ -7,112 +7,65 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "38752028-124D-4883-A68A-F0EF80F6332E"
+            uuid = "5EEFE3F0-BD9F-4BCC-8BB7-154DB09E0E9E"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "gameEngine/textureWrapper.cpp"
+            filePath = "gameEngine/textureHandler.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "24"
-            endingLineNumber = "24"
-            landmarkName = "KTexture::KTexture()"
+            startingLineNumber = "21"
+            endingLineNumber = "21"
+            landmarkName = "TextureRegister::freeAll()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "38752028-124D-4883-A68A-F0EF80F6332E - 163c8357abd4c1db"
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "KTexture::~KTexture()"
-                  moduleName = "gameEngine"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ksbilodeau/Desktop/Xcode%20Projects/gameEngine/gameEngine/textureWrapper.cpp"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "23"
-                  endingLineNumber = "23"
-                  offsetFromSymbolStart = "16">
-               </Location>
-               <Location
-                  uuid = "38752028-124D-4883-A68A-F0EF80F6332E - 163c8357abd4c1db"
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "KTexture::~KTexture()"
-                  moduleName = "gameEngine"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ksbilodeau/Desktop/Xcode%20Projects/gameEngine/gameEngine/textureWrapper.cpp"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "22"
-                  endingLineNumber = "22"
-                  offsetFromSymbolStart = "16">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "34CAF151-F0B7-40B9-A8D1-FBCB6DA6BA2E"
+            uuid = "C3B06061-F196-4DC5-A07F-5D69089C74B9"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "gameEngine/sprite.cpp"
+            filePath = "gameEngine/guiButtons.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "22"
-            endingLineNumber = "22"
-            landmarkName = "Sprite::~Sprite()"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
+            landmarkName = "MainMenuButton::createMainMenuButton(backgroundTexture, icon, x, y, rects)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "34CAF151-F0B7-40B9-A8D1-FBCB6DA6BA2E - b63a5cd3ce05e636"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Sprite::~Sprite()"
-                  moduleName = "gameEngine"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ksbilodeau/Desktop/Xcode%20Projects/gameEngine/gameEngine/sprite.cpp"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "23"
-                  endingLineNumber = "23"
-                  offsetFromSymbolStart = "27">
-               </Location>
-               <Location
-                  uuid = "34CAF151-F0B7-40B9-A8D1-FBCB6DA6BA2E - b63a5cd3ce05e636"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Sprite::~Sprite()"
-                  moduleName = "gameEngine"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ksbilodeau/Desktop/Xcode%20Projects/gameEngine/gameEngine/sprite.cpp"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "23"
-                  endingLineNumber = "23"
-                  offsetFromSymbolStart = "16">
-               </Location>
-               <Location
-                  uuid = "34CAF151-F0B7-40B9-A8D1-FBCB6DA6BA2E - b63a5cd3ce05e636"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Sprite::~Sprite()"
-                  moduleName = "gameEngine"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ksbilodeau/Desktop/Xcode%20Projects/gameEngine/gameEngine/sprite.cpp"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "23"
-                  endingLineNumber = "23"
-                  offsetFromSymbolStart = "20">
-               </Location>
-            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5ED10124-19C5-47D3-B9C7-C66805CAEC5C"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "gameEngine/guiButtons.cpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "61"
+            endingLineNumber = "61"
+            landmarkName = "MainMenuButton::render()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B54FC91B-77D3-4222-A51E-D5986EDB1933"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "gameEngine/guiButtons.cpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
+            landmarkName = "MainMenuButton::handleMouseClick(event)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

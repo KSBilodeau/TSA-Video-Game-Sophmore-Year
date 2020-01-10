@@ -21,13 +21,13 @@ TextureRegister::~TextureRegister()
 void TextureRegister::freeAll()
 {
     for (std::pair<int, std::shared_ptr<KTexture>> texture : textures)
-        texture.second->free();
-    
-    for (int i = 0; i < textures.size(); i++)
     {
-        textures.erase(i);
-        textureRegistry.erase(textureRegistry.begin() + i);
+        texture.second->free();
+        texture.second.reset();
     }
+
+    textures.clear();
+    textureRegistry.clear();
 }
 
 void TextureRegister::free(int textureID)
@@ -66,7 +66,7 @@ const std::shared_ptr<KTexture> &TextureRegister::requestAccess(int textureID)
     if (textures.count(textureID) == 0)
     {
         printf("Texture with id of %i has not been registered yet!\n", textureID);
-        throw std::runtime_error("Access denied!\n");
+        throw mException;
     }
     else
         return textures.at(textureID);

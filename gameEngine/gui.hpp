@@ -33,7 +33,7 @@ public:
     void update() override;
     
     // Handles input regarding the GUI
-    bool handleMouseClick(SDL_Event event) override;
+    bool handleMouseClick(SDL_Event &event) override;
     
     // Returns GUI's dimensions
     SDL_Rect &getRectangle() override;

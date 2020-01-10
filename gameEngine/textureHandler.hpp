@@ -16,6 +16,17 @@
 
 #include "textureWrapper.hpp"
 
+class TextureAccessException : public std::exception
+{
+public:
+    virtual const char* what() const throw()
+    {
+        return "TextureRegistry Error: Texture retrieval access denied!\n";
+    }
+};
+
+const TextureAccessException mException;
+
 class TextureRegister
 {
 public:

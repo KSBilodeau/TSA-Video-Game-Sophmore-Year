@@ -15,6 +15,7 @@
 #include "sprite.hpp"
 #include "textureWrapper.hpp"
 #include "textureHandler.hpp"
+#include "guiButtons.hpp"
 #include "clock.hpp"
 
 SDL_Window* gWindow;
@@ -112,6 +113,26 @@ bool loadMedia()
         textureRegistry.registerTexture(1, testTexture);
     }
     
+    if (!testTexture.loadFromFile("redSheet.png", 1))
+    {
+        printf("Test texture could not be loaded!\n");
+        success = false;
+    }
+    else
+    {
+        textureRegistry.registerTexture(2, testTexture);
+    }
+
+    if (!testTexture.loadFromFile("save.png", .9))
+    {
+        printf("Test texture could not be loaded!\n");
+        success = false;
+    }
+    else
+    {
+        textureRegistry.registerTexture(3, testTexture);
+    }
+    
     return success;
 }
 
@@ -135,50 +156,69 @@ int main(int argc, const char * argv[])
     // FPS cap timer
     KClock capTimer;
     
-    if (!init())
-        printf("Failed to initialize!\n");
-    else if (!loadMedia())
-        printf("Failed to load media!\n");
-    
-    Sprite sprite;
-    SDL_Rect rect {0, 0, 100, 100};
-    sprite.createSprite(0, rect, true);
-    
-    int countedFrames = 0;
-    fpsTimer.start();
-    
-    while (isRunning)
+    try
     {
-        capTimer.start();
+        if (!init())
+            printf("Failed to initialize!\n");
+        else if (!loadMedia())
+            printf("Failed to load media!\n");
         
-        while (SDL_PollEvent(&event))
+        Sprite sprite;
+        SDL_Rect rect {0, 0, 100, 100};
+        sprite.createSprite(0, rect, true);
+        
+        int countedFrames = 0;
+        fpsTimer.start();
+        
+        SDL_Rect buttonClipRect1 {339, 98, 49, 49};
+        SDL_Rect buttonClipRect2 {290, 98, 49, 45};
+        SDL_Rect rects[2] {buttonClipRect1, buttonClipRect2};
+        MainMenuButton button;
+        button.createMainMenuButton(textureRegistry.requestAccess(2), textureRegistry.requestAccess(3), 0, 0, rects);
+        
+        while (isRunning)
         {
-            if (event.type == SDL_QUIT)
-                isRunning = false;
+            capTimer.start();
+            
+            while (SDL_PollEvent(&event))
+            {
+                if (event.type == SDL_QUIT)
+                    isRunning = false;
+                
+                if (event.type == SDL_MOUSEBUTTONDOWN)
+                    button.handleMouseClick(event);
+                if (event.type == SDL_MOUSEBUTTONUP && !button.handleMouseClick(event))
+                    button.activate();
+            }
+            
+            float avgFPS = countedFrames / (fpsTimer.getTicks() / 1000.0f);
+            if (avgFPS > 2000000)
+                avgFPS = 0;
+            
+            SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+            SDL_RenderClear(gRenderer);
+            
+//            textureRegistry.renderTexture(0);
+//            textureRegistry.renderTexture(1);
+//            testTexture.render(0, 0, true);
+            sprite.render();
+            button.render();
+            
+            SDL_RenderPresent(gRenderer);
+            SDL_RenderClear(gRenderer);
+            
+            countedFrames++;
+            
+            int frameTicks = capTimer.getTicks();
+            if (frameTicks < 1000 / 61)
+                SDL_Delay((1000 / 61) - frameTicks);
+            
+            std::cout << avgFPS << '\n';
         }
-        
-        float avgFPS = countedFrames / (fpsTimer.getTicks() / 1000.0f);
-        if (avgFPS > 2000000)
-            avgFPS = 0;
-        
-        SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
-        SDL_RenderClear(gRenderer);
-        
-        textureRegistry.renderTexture(0);
-        textureRegistry.renderTexture(1);
-//        testTexture.render(0, 0, true);
-//        sprite.render();
-        
-        SDL_RenderPresent(gRenderer);
-        SDL_RenderClear(gRenderer);
-        
-        countedFrames++;
-        
-        int frameTicks = capTimer.getTicks();
-        if (frameTicks < 1000 / 60)
-            SDL_Delay((1000 / 60) - frameTicks);
-        
-//        std::cout << avgFPS << '\n';
+    }
+    catch (TextureAccessException e)
+    {
+        std::cout << e.what() << "\n";
     }
     
     close();

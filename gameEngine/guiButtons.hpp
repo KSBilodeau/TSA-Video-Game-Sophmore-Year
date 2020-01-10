@@ -14,11 +14,24 @@
 #include "gameObject.hpp"
 #include "textureWrapper.hpp"
 
-class MainMenuButton : GameObject
+class GUIButton : GameObject
+{
+public:
+    // Pure virtual deconstructor
+    virtual ~GUIButton() = 0;
+    
+    // Called by handle mouse click
+    virtual void activate() = 0;
+};
+
+class MainMenuButton : GUIButton
 {
 public:
     // Initialize variable
     MainMenuButton();
+    
+    // Creates a gui button
+    void createMainMenuButton(std::shared_ptr<KTexture> backgroundTexture, std::shared_ptr<KTexture> icon, int x, int y, SDL_Rect rects[2]);
     
     // Renders button to screen
     void render() override;
@@ -26,21 +39,33 @@ public:
     // Updates button?
     void update() override;
     
+    // Frees everything maybe?
+    void free() override;
+    
     // Handles mouse clicks on button
-    bool handleMouseClick(SDL_Event event) override;
+    bool handleMouseClick(SDL_Event &event) override;
+    
+    // Does whatever this button is supposed to do
+    void activate() override;
     
     // Returns button's dimensions
     SDL_Rect& getRectangle() override;
     
 private:
     // Base texture
-    KTexture* mBackgroundTexture;
+    std::shared_ptr<KTexture> mBackgroundTexture;
     
     // Icon texture
-    KTexture* mIcon;
+    std::shared_ptr<KTexture> mIcon;
     
-    // Buttons location
-    int x, y;
+    // Selection flag
+    bool isSelected;
+    
+    // Buttons dimensions
+    SDL_Rect mRectangle;
+    
+    // Texture clip rectangles
+    SDL_Rect mClipRects[2];
 };
 
 #endif /* guiButtons_hpp */

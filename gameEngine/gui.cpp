@@ -33,7 +33,7 @@ void MainMenu::update()
     
 }
 
-bool MainMenu::handleMouseClick(SDL_Event event)
+bool MainMenu::handleMouseClick(SDL_Event &event)
 {
     // Click success flag
     bool success = false;

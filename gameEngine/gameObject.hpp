@@ -28,7 +28,7 @@ public:
     virtual void update() = 0;
     
     // Handle mouse clicks in relation to game object
-    virtual bool handleMouseClick(SDL_Event event) = 0;
+    virtual bool handleMouseClick(SDL_Event &event) = 0;
     
     // Returns game object's dimensions
     virtual SDL_Rect &getRectangle() = 0;

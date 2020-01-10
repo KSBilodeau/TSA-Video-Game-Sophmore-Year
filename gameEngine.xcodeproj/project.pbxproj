@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		868981D923C020FE00835B52 /* sprites.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 868981D823C020E400835B52 /* sprites.png */; };
+		868981DF23C402A300835B52 /* red_panel.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 868981DE23C4029A00835B52 /* red_panel.png */; };
+		868981E123C4030B00835B52 /* red_button04.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 868981E023C4030300835B52 /* red_button04.png */; };
+		868981E423C409CF00835B52 /* save.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 868981E223C4038700835B52 /* save.png */; };
+		869E60D423C699FD007D176D /* redSheet.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 869E60D323C69948007D176D /* redSheet.png */; };
 		86C3013023BA993E007313D2 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86C3012F23BA993E007313D2 /* main.cpp */; };
 		86C9193C23BAA43C00D86191 /* textureWrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86C9193A23BAA43C00D86191 /* textureWrapper.cpp */; };
 		86C9195723BAB77300D86191 /* sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86C9195323BAB77300D86191 /* sprite.cpp */; };
@@ -27,6 +31,10 @@
 			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
+				868981DF23C402A300835B52 /* red_panel.png in CopyFiles */,
+				868981E123C4030B00835B52 /* red_button04.png in CopyFiles */,
+				869E60D423C699FD007D176D /* redSheet.png in CopyFiles */,
+				868981E423C409CF00835B52 /* save.png in CopyFiles */,
 				86C9196723BC04AA00D86191 /* background.png in CopyFiles */,
 				868981D923C020FE00835B52 /* sprites.png in CopyFiles */,
 			);
@@ -36,6 +44,10 @@
 
 /* Begin PBXFileReference section */
 		868981D823C020E400835B52 /* sprites.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sprites.png; sourceTree = "<group>"; };
+		868981DE23C4029A00835B52 /* red_panel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = red_panel.png; sourceTree = "<group>"; };
+		868981E023C4030300835B52 /* red_button04.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = red_button04.png; sourceTree = "<group>"; };
+		868981E223C4038700835B52 /* save.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = save.png; path = ../../../../Downloads/Kenney_gameIcons/PNG/White/1x/save.png; sourceTree = "<group>"; };
+		869E60D323C69948007D176D /* redSheet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = redSheet.png; sourceTree = "<group>"; };
 		86C3012C23BA993E007313D2 /* gameEngine */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = gameEngine; sourceTree = BUILT_PRODUCTS_DIR; };
 		86C3012F23BA993E007313D2 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		86C9193923BA9F0400D86191 /* main.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = main.hpp; sourceTree = "<group>"; };
@@ -146,6 +158,10 @@
 		86C9196523BC046500D86191 /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				868981E223C4038700835B52 /* save.png */,
+				868981DE23C4029A00835B52 /* red_panel.png */,
+				868981E023C4030300835B52 /* red_button04.png */,
+				869E60D323C69948007D176D /* redSheet.png */,
 				868981D823C020E400835B52 /* sprites.png */,
 				86C9196623BC048E00D86191 /* background.png */,
 			);
