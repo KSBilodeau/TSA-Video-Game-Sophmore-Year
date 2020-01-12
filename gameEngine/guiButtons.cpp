@@ -87,7 +87,10 @@ bool MainMenuButton::handleMouseClick(SDL_Event &event)
     if ((x < mRectangle.x + mRectangle.w && x + 1 > mRectangle.x) &&
         (y < mRectangle.y + mRectangle.h && y + 1 > mRectangle.y))
     {
-        activate();
+        if (lambdaActivate.lambda != nullptr)
+            lambdaActivate(isSelected);
+//        else
+//            activate();
         
         success = true;
     }
@@ -95,7 +98,17 @@ bool MainMenuButton::handleMouseClick(SDL_Event &event)
     return success;
 }
 
+void MainMenuButton::toggleSelected()
+{
+    isSelected = !isSelected;
+}
+
 SDL_Rect &MainMenuButton::getRectangle()
 {
     return mRectangle;
+}
+
+bool &MainMenuButton::getButtonState()
+{
+    return isSelected;
 }

@@ -25,7 +25,7 @@ public:
     ~Sprite();
     
     // Attaches neccessary assets
-    void createSprite(int textureID, SDL_Rect &rect, bool fixed);
+    void createSprite(int textureID, SDL_Rect &rect, bool fixed, SDL_Rect *clipRect = nullptr);
     
     // Free variables and textures
     void free() override;
@@ -39,6 +39,9 @@ public:
     // Handles mouse clicks on sprite
     bool handleMouseClick(SDL_Event &event) override;
     
+    // Sets clipRect
+    void setClipRect(SDL_Rect &rect);
+    
     // Returns sprites dimensions
     SDL_Rect &getRectangle() override;
     
@@ -51,6 +54,9 @@ private:
     
     // Sprite's rectangle
     SDL_Rect mRectangle;
+    
+    // Texture clipRectangle
+    SDL_Rect* mClipRect;
 };
 
 class AnimatedSprite : Sprite

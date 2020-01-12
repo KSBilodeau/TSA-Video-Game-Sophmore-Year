@@ -173,8 +173,11 @@ int main(int argc, const char * argv[])
         SDL_Rect buttonClipRect1 {339, 98, 49, 49};
         SDL_Rect buttonClipRect2 {290, 98, 49, 45};
         SDL_Rect rects[2] {buttonClipRect1, buttonClipRect2};
+        
         MainMenuButton button;
         button.createMainMenuButton(textureRegistry.requestAccess(2), textureRegistry.requestAccess(3), 0, 0, rects);
+
+        button.lambdaActivate = [](MainMenuButton *self, bool &isSelected) { isSelected = !isSelected; };
         
         while (isRunning)
         {
@@ -188,7 +191,7 @@ int main(int argc, const char * argv[])
                 if (event.type == SDL_MOUSEBUTTONDOWN)
                     button.handleMouseClick(event);
                 if (event.type == SDL_MOUSEBUTTONUP && !button.handleMouseClick(event))
-                    button.activate();
+                    button.lambdaActivate(button.getButtonState());
             }
             
             float avgFPS = countedFrames / (fpsTimer.getTicks() / 1000.0f);
@@ -198,9 +201,6 @@ int main(int argc, const char * argv[])
             SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
             SDL_RenderClear(gRenderer);
             
-//            textureRegistry.renderTexture(0);
-//            textureRegistry.renderTexture(1);
-//            testTexture.render(0, 0, true);
             sprite.render();
             button.render();
             
