@@ -10,8 +10,10 @@
 #define spritesheet_hpp
 
 #include <stdio.h>
+#include <map>
 
 #include "textureWrapper.hpp"
+#include "sprite.hpp"
 
 class Spritesheet
 {
@@ -26,7 +28,14 @@ public:
     void free();
     
     // Load spritesheet from image
-    void loadFromFile(KTexture texture, SDL_Rect rect);
+    void loadFromFile(std::shared_ptr<KTexture> &texture, int spriteSizeX, int spriteSizeY, bool fixed);
+    
+    // Returns a sprite of a given id
+    const std::shared_ptr<Sprite> &getSprite(int id);
+    
+private:
+    // All loaded sprites
+    std::map<int, std::shared_ptr<Sprite>> mLoadedSprites;
 };
 
 #endif /* spritesheet_hpp */

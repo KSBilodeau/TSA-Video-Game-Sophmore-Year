@@ -30,7 +30,7 @@ public:
     void render() override;
     
     // Updates GUI
-    void update() override;
+    void update(SDL_Event &event) override;
     
     // Handles input regarding the GUI
     bool handleMouseClick(SDL_Event &event) override;

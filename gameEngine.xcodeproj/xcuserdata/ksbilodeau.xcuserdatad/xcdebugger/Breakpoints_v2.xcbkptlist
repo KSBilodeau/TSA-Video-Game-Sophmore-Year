@@ -23,22 +23,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "C3B06061-F196-4DC5-A07F-5D69089C74B9"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "gameEngine/guiButtons.cpp"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "38"
-            endingLineNumber = "38"
-            landmarkName = "MainMenuButton::createMainMenuButton(backgroundTexture, icon, x, y, rects)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "5ED10124-19C5-47D3-B9C7-C66805CAEC5C"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -46,8 +30,8 @@
             filePath = "gameEngine/guiButtons.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "61"
-            endingLineNumber = "61"
+            startingLineNumber = "71"
+            endingLineNumber = "71"
             landmarkName = "MainMenuButton::render()"
             landmarkType = "7">
          </BreakpointContent>
@@ -62,25 +46,88 @@
             filePath = "gameEngine/guiButtons.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "79"
-            endingLineNumber = "79"
-            landmarkName = "MainMenuButton::handleMouseClick(event)"
+            startingLineNumber = "89"
+            endingLineNumber = "89"
+            landmarkName = "MainMenuButton::free()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "1728CA55-D282-4A7D-9B01-2229203BBC92"
-            shouldBeEnabled = "Yes"
+            uuid = "0C007C26-2E3B-48FC-9947-12C7F25CB472"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "gameEngine/sprite.cpp"
+            filePath = "gameEngine/tile.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "35"
-            endingLineNumber = "35"
-            landmarkName = "Sprite::createSprite(textureID, rect, fixed, clipRect)"
+            startingLineNumber = "52"
+            endingLineNumber = "52"
+            landmarkName = "KTilesheet::loadFromTexture(textureID, tileSizeX, tileSizeY)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "0C007C26-2E3B-48FC-9947-12C7F25CB472 - f326b10179b33726"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "KTilesheet::loadFromTexture(int, int, int)"
+                  moduleName = "gameEngine"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ksbilodeau/Desktop/Xcode%20Projects/gameEngine/gameEngine/tile.cpp"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "52"
+                  endingLineNumber = "52"
+                  offsetFromSymbolStart = "618">
+               </Location>
+               <Location
+                  uuid = "0C007C26-2E3B-48FC-9947-12C7F25CB472 - f326b10179b33726"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "KTilesheet::loadFromTexture(int, int, int)"
+                  moduleName = "gameEngine"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ksbilodeau/Desktop/Xcode%20Projects/gameEngine/gameEngine/tile.cpp"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "52"
+                  endingLineNumber = "52"
+                  offsetFromSymbolStart = "632">
+               </Location>
+               <Location
+                  uuid = "0C007C26-2E3B-48FC-9947-12C7F25CB472 - f326b10179b33726"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "KTilesheet::loadFromTexture(int, int, int)"
+                  moduleName = "gameEngine"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ksbilodeau/Desktop/Xcode%20Projects/gameEngine/gameEngine/tile.cpp"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "52"
+                  endingLineNumber = "52"
+                  offsetFromSymbolStart = "1323">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C7B96023-8D91-45D4-B3F0-3B3035FF2DDD"
+            shouldBeEnabled = "No"
+            ignoreCount = "100000"
+            continueAfterRunningActions = "No"
+            filePath = "gameEngine/player.cpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
+            landmarkName = "Player::update(event)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

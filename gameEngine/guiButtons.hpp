@@ -65,7 +65,7 @@ public:
     void render() override;
     
     // Updates button?
-    void update() override;
+    void update(SDL_Event &event) override;
     
     // Frees everything maybe?
     void free() override;

@@ -12,6 +12,7 @@
 
 #include <SDL_image.h>
 #include <SDL_ttf.h>
+#include <cmath>
 
 KTexture::KTexture()
 {
@@ -120,8 +121,13 @@ bool KTexture::loadFromString(std::string text, SDL_Color textColor)
 
 void KTexture::render(int x, int y, bool fixed, SDL_Rect* clipRect)
 {
+    SDL_Rect renderQuad;
+    
     // The rectangle the image will be rendered to
-    SDL_Rect renderQuad {((fixed) ? x + camera.x : x), ((fixed) ? y + camera.y : y), mWidth, mHeight};
+    if (fixed)
+        renderQuad = {x, y, mWidth, mHeight};
+    else
+        renderQuad = {x - camera.x, y - camera.y, mWidth, mHeight};
     
     // Applies clip dimensions to rendering quad
     if (clipRect != nullptr)

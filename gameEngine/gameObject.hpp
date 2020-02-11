@@ -25,7 +25,7 @@ public:
     virtual void render() = 0;
     
     // Updates game object
-    virtual void update() = 0;
+    virtual void update(SDL_Event &event) = 0;
     
     // Handle mouse clicks in relation to game object
     virtual bool handleMouseClick(SDL_Event &event) = 0;

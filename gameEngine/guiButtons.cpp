@@ -9,10 +9,24 @@
 #include "guiButtons.hpp"
 #include "main.hpp"
 
+// THIS IS THE START OF THE GUIBUTTON INTERFACE METHOD DECLARATION AREA
+
 GUIButton::~GUIButton()
 {
     
 }
+
+// THIS IS THE END OF THE GUIBUTTON INTERFACE METHOD DECLARATION AREA
+
+
+
+// THIS IS THE START OF THE TEXT BOX METHOD DECLARATION AREA
+
+// THIS IS THE END OF THE TEXT BOX METHOD DECLARATION AREA
+
+
+
+// THIS IS THE START OF THE MAIN MENU BUTTON METHOD DECLARATION AREA
 
 MainMenuButton::MainMenuButton()
 {
@@ -61,7 +75,7 @@ void MainMenuButton::render()
     SDL_RenderDrawRect(gRenderer, &mRectangle);
 }
 
-void MainMenuButton::update()
+void MainMenuButton::update(SDL_Event &event)
 {
     
 }
@@ -112,3 +126,5 @@ bool &MainMenuButton::getButtonState()
 {
     return isSelected;
 }
+
+// THIS IS THE END OF THE MAIN MENU BUTTON METHOD DECLARATION AREA

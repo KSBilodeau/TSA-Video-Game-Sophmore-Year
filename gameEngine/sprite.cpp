@@ -11,6 +11,8 @@
 #include "sprite.hpp"
 #include "main.hpp"
 
+// THIS IS THE START OF THE SPRITE METHOD DECLARATION AREA
+
 Sprite::Sprite()
 {
     mTexture = nullptr;
@@ -35,16 +37,24 @@ void Sprite::free()
 void Sprite::createSprite(int textureID, SDL_Rect &rect, bool fixed, SDL_Rect *clipRect)
 {
     mTexture = nullptr;
-    std::cout << (textureRegistry.requestAccess(textureID)) << " " << mTexture << "\n";
     mTexture = std::move(textureRegistry.requestAccess(textureID));
-    
-//    std::cout << mTexture.use_count() << " " << textureRegistry.requestAccess(textureID).use_count() << "\n";
     
     if (clipRect != nullptr)
         mClipRect = clipRect;
     
     mFixed = fixed;
     mRectangle = rect;
+}
+
+void Sprite::createSprite(std::shared_ptr<KTexture> &texture, bool fixed, SDL_Rect* clipRect)
+{
+    mTexture->free();
+    mTexture = std::move(texture);
+    
+    mFixed = fixed;
+    
+    if (clipRect != nullptr)
+        mClipRect = clipRect;
 }
 
 void Sprite::render()
@@ -55,9 +65,15 @@ void Sprite::render()
         mTexture->render(mRectangle.x, mRectangle.y, mFixed);
 }
 
-void Sprite::update()
+void Sprite::update(SDL_Event &event)
 {
     
+}
+
+void Sprite::setSpritePos(int x, int y)
+{
+    mRectangle.x = x;
+    mRectangle.y = y;
 }
 
 bool Sprite::handleMouseClick(SDL_Event &event)
@@ -77,3 +93,5 @@ SDL_Rect &Sprite::getRectangle()
 {
     return mRectangle;
 }
+
+// THIS IS THE END OF THE SPRITE METHOD DECLARTION AREA

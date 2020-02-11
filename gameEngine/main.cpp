@@ -10,6 +10,7 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_ttf.h>
+#include <SDL_mixer.h>
 
 #include "main.hpp"
 #include "sprite.hpp"
@@ -17,16 +18,27 @@
 #include "textureHandler.hpp"
 #include "guiButtons.hpp"
 #include "clock.hpp"
+#include "block.hpp"
 
-SDL_Window* gWindow;
+SDL_Window* gWindow = nullptr;
 
-SDL_Renderer* gRenderer;
+SDL_Renderer* gRenderer = nullptr;
 
-TTF_Font* gFont;
+TTF_Font* gFont = nullptr;
+
+Mix_Music* gIntroMusic = nullptr;
+
+Player gPlayer;
+
+KMap gMap;
 
 TextureRegister textureRegistry;
 
+KTilesheet tiles;
+
 SDL_Rect camera;
+
+std::pair<int, int> selectedTileID;
 
 bool init()
 {
@@ -34,7 +46,7 @@ bool init()
     bool success = true;
     
     // Initialize SDL
-    if (SDL_Init(SDL_INIT_VIDEO) < 0)
+    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0)
     {
         printf("SDL could not initialize! SDL Error: %s\n", SDL_GetError());
         success = false;
@@ -66,10 +78,17 @@ bool init()
                 SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
                 
                 // Initialize image loading (specifically pngs; however, more can be added)
-                int imgFlags = IMG_INIT_PNG;
+                int imgFlags = IMG_INIT_PNG | IMG_INIT_JPG;
                 if (!(IMG_Init(imgFlags) & imgFlags))
                 {
                     printf("SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError());
+                    success = false;
+                }
+                
+                // Initialize SDL mixer
+                if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048))
+                {
+                    printf( "SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError() );
                     success = false;
                 }
                 
@@ -133,6 +152,33 @@ bool loadMedia()
         textureRegistry.registerTexture(3, testTexture);
     }
     
+    if (!testTexture.loadFromFile("Tiles1.png", 3))
+    {
+        printf("Test texture could not be loaded!\n");
+        success = false;
+    }
+    else
+    {
+        textureRegistry.registerTexture(4, testTexture);
+    }
+    
+    if (!testTexture.loadFromFile("Player.jpg", 3))
+    {
+        printf("Player texure could not be loaded!\n");
+        success = false;
+    }
+    else
+    {
+        textureRegistry.registerTexture(5, testTexture);
+    }
+    
+    gIntroMusic = Mix_LoadMUS("Game_Music.wav");
+    if (gIntroMusic == nullptr)
+    {
+        printf("Music could not be loaded!\n");
+        success = false;
+    }
+    
     return success;
 }
 
@@ -156,6 +202,9 @@ int main(int argc, const char * argv[])
     // FPS cap timer
     KClock capTimer;
     
+    // Games average FPS
+    float avgFPS;
+    
     try
     {
         if (!init())
@@ -163,9 +212,14 @@ int main(int argc, const char * argv[])
         else if (!loadMedia())
             printf("Failed to load media!\n");
         
+        camera = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
+        
         Sprite sprite;
         SDL_Rect rect {0, 0, 100, 100};
         sprite.createSprite(0, rect, true);
+        
+        SDL_Rect startingRect {0, 0, 20 * SCALE_FACTOR, 26 * SCALE_FACTOR};
+        gPlayer.createPlayer(textureRegistry.requestAccess(5), 20, 26, startingRect);
         
         int countedFrames = 0;
         fpsTimer.start();
@@ -179,6 +233,16 @@ int main(int argc, const char * argv[])
 
         button.lambdaActivate = [](MainMenuButton *self, bool &isSelected) { isSelected = !isSelected; };
         
+        tiles.loadFromTexture(4, 16, 16);
+        
+        KBlock block;
+        block.loadDefaultTile(tiles.requestAccess(std::make_pair(0, 1)));
+        block.setBlockPosition(0, 0);
+        
+//        ArrowKeys arrKeys;
+        
+        gMap.loadMap();
+        
         while (isRunning)
         {
             capTimer.start();
@@ -190,19 +254,31 @@ int main(int argc, const char * argv[])
                 
                 if (event.type == SDL_MOUSEBUTTONDOWN)
                     button.handleMouseClick(event);
-                if (event.type == SDL_MOUSEBUTTONUP && !button.handleMouseClick(event))
+                else if (event.type == SDL_MOUSEBUTTONUP && !button.handleMouseClick(event))
                     button.lambdaActivate(button.getButtonState());
+                else
+                    block.handleMouseClick(event);
+            
+                if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_p)
+                    Mix_PlayMusic(gIntroMusic, 1);
+                
+                gPlayer.update(event);
+                gMap.update(event);
             }
             
-            float avgFPS = countedFrames / (fpsTimer.getTicks() / 1000.0f);
+            avgFPS = countedFrames / (fpsTimer.getTicks() / 1000.0f);
             if (avgFPS > 2000000)
                 avgFPS = 0;
             
             SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
             SDL_RenderClear(gRenderer);
             
-            sprite.render();
+//            block.render();
+            gMap.render();
             button.render();
+                        
+            gPlayer.move();
+            gPlayer.render();
             
             SDL_RenderPresent(gRenderer);
             SDL_RenderClear(gRenderer);

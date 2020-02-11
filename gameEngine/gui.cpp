@@ -28,7 +28,7 @@ void MainMenu::render()
     
 }
 
-void MainMenu::update()
+void MainMenu::update(SDL_Event &event)
 {
     
 }
