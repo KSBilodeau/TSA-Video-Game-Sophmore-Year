@@ -55,7 +55,6 @@ void KMap::loadBlock(std::pair<int, int> coords)
     {
         block.setBlockPosition(coords.first, coords.second);
         block.loadDefaultTile(tiles.requestAccess(std::make_pair(0, 1)));
-        printf("Tile is being shared with %ld objects!\n", tiles.requestAccess(std::make_pair(0, 1)).use_count());
         
         std::pair<std::pair<int, int>, KBlock> blockPair = std::make_pair(coords, block);
         mBlockList.insert(blockPair);

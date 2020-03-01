@@ -34,8 +34,8 @@ struct ArrowKeys
 };
 
 // Basic screen dimensions for window setup
-const int SCREEN_WIDTH = 600;
-const int SCREEN_HEIGHT = 600;
+const int SCREEN_WIDTH = 750;
+const int SCREEN_HEIGHT = 750;
 
 // Game scale factor for tile textures
 const int SCALE_FACTOR = 3;

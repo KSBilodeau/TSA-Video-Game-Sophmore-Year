@@ -21,7 +21,8 @@ KTexture::KTexture()
     mWidth = 0;
     mHeight = 0;
     
-    mScale = 0;
+    mXScale = 0;
+    mYScale = 0;
 }
 
 void KTexture::free()
@@ -29,7 +30,8 @@ void KTexture::free()
     mWidth = 0;
     mHeight = 0;
     
-    mScale = 0;
+    mXScale = 0;
+    mYScale = 0;
 }
 
 bool KTexture::loadFromFile(std::string path, double scale)
@@ -69,7 +71,8 @@ bool KTexture::loadFromFile(std::string path, double scale)
     }
     
     // Set scale
-    mScale = scale;
+    mXScale = scale;
+    mYScale = scale;
     
     // Get rid of the old surface
     SDL_FreeSurface(loadedSurface);
@@ -86,7 +89,8 @@ bool KTexture::loadFromString(std::string text, SDL_Color textColor)
     free();
     
     // Render text to surface
-    SDL_Surface* loadedSurface = TTF_RenderText_Solid(gFont, text.c_str(), textColor);
+    printf("%s", text.c_str());
+    SDL_Surface* loadedSurface = TTF_RenderText_Blended_Wrapped(gFont, text.c_str(), textColor, 300 * 1.776);
     if (loadedSurface == nullptr)
     {
         printf("Unable to render text surface! SDL_ttf Error: %s\n", TTF_GetError());
@@ -95,9 +99,6 @@ bool KTexture::loadFromString(std::string text, SDL_Color textColor)
     // If image was loaded and applied to surface
     else
     {
-        // Color key image
-        SDL_SetColorKey(loadedSurface, SDL_TRUE, SDL_MapRGB(loadedSurface->format, 0xFF, 0, 0xDC));
-        
         // Create texture from surface
         mTexture = std::shared_ptr<SDL_Texture>(SDL_CreateTextureFromSurface(gRenderer, loadedSurface), [](SDL_Texture* texture) {SDL_DestroyTexture(texture);});
         if (mTexture == nullptr)
@@ -112,6 +113,10 @@ bool KTexture::loadFromString(std::string text, SDL_Color textColor)
             mHeight = loadedSurface->h;
         }
     }
+    
+    // Sets scale
+    mXScale = 1;
+    mYScale = 1;
     
     // Get rid of the old surface
     SDL_FreeSurface(loadedSurface);
@@ -136,8 +141,8 @@ void KTexture::render(int x, int y, bool fixed, SDL_Rect* clipRect)
         renderQuad.h = clipRect->h;
     }
     
-    renderQuad.w *= mScale;
-    renderQuad.h *= mScale;
+    renderQuad.w *= mXScale;
+    renderQuad.h *= mYScale;
     
     SDL_RenderCopy(gRenderer, mTexture.get(), clipRect, &renderQuad);
 }
@@ -157,9 +162,10 @@ void KTexture::modifyAlpha(Uint8 alpha)
     SDL_SetTextureAlphaMod(mTexture.get(), alpha);
 }
 
-void KTexture::modifyTextureScale(double scale)
+void KTexture::modifyTextureScale(double xScale, double yScale)
 {
-    mScale = scale;
+    mXScale = xScale;
+    mYScale = yScale;
 }
 
 int KTexture::getWidth()

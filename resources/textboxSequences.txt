@@ -1,0 +1,7 @@
+UNISEQUENCE FILE
+SEQUENCE START 1
+"Hello, World!"
+"How are you?"
+"I'm doing great!"
+"Well, that's just fantastic!!"
+SEQUENCE END 1

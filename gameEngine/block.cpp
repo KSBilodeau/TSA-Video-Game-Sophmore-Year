@@ -42,7 +42,7 @@ void KBlock::render()
     }
     
     for (auto &tileArray : mMappedTiles)
-        tileArray.second.render(tileArray.second.getRectangle().x * 48, tileArray.second.getRectangle().y * 48);
+        tileArray.second.render(tileArray.second.getRectangle().x, tileArray.second.getRectangle().y);
 }
 
 void KBlock::setBlockPosition(int x, int y)
@@ -60,8 +60,8 @@ void KBlock::handleMouseClick(SDL_Event &event)
     SDL_GetMouseState(&x, &y);
     
     double x1, y1;
-    x1 = ((double) (x + (camera.x)) / (16.0 * 3));
-    y1 = ((double) (y + (camera.y)) / (16.0 * 3));
+    x1 = ((double) (x + (camera.x)) / (TILE_WIDTH));
+    y1 = ((double) (y + (camera.y)) / (TILE_HEIGHT));
     
     x1 = std::floor(x1);
     y1 = std::floor(y1);
@@ -70,7 +70,7 @@ void KBlock::handleMouseClick(SDL_Event &event)
         mMappedTiles.erase(std::make_pair(x1, y1));
     else if (mMappedTiles.count(std::make_pair(x1, y1)) == 0 && (SDL_GetMouseState(NULL, NULL) & SDL_BUTTON(SDL_BUTTON_LEFT)))
     {
-        tiles.requestAccess(selectedTileID)->moveTo(x1, y1);
+        tiles.requestAccess(selectedTileID)->moveTo(x1 * TILE_WIDTH, y1 * TILE_HEIGHT);
         mMappedTiles.insert(std::make_pair(std::make_pair(x1, y1), *tiles.requestAccess(selectedTileID).get()));
     }
 }

@@ -32,15 +32,16 @@ void KTilesheet::loadFromTexture(int textureID, int tileSizeX, int tileSizeY)
         for (int x = 0; x < texture->getWidth(); x += tileSizeY)
         {
             KTile tile;
-            SDL_Rect rect {x, y, tileSizeX, tileSizeY};
-            tile.loadFromTexture(textureID, rect, &rect);
+            SDL_Rect rect {x, y, TILE_WIDTH, TILE_HEIGHT};
+            SDL_Rect clipRect {x, y, tileSizeX, tileSizeY};
+            tile.loadFromTexture(textureID, rect, &clipRect);
             
             if (tileRegistry.empty())
             {
                 tiles.insert(std::make_pair(std::make_pair(x / tileSizeX, y / tileSizeY), std::make_shared<KTile>(tile)));
                 tileRegistry.push_back(std::make_shared<KTile>(tile));
             }
-            else if (tiles.count(std::make_pair(x, y)) == 0)
+            else if (tiles.count(std::make_pair(x / tileSizeX, y / tileSizeY)) == 0)
             {
                 tiles.insert(std::make_pair(std::make_pair(x / tileSizeX, y / tileSizeY), std::make_shared<KTile>(tile)));
                 tileRegistry.push_back(std::make_shared<KTile>(tile));
@@ -109,7 +110,7 @@ void KTile::render(int blockX, int blockY)
     else
         mTexture->render(blockX, blockY, false);
     
-    SDL_Rect rect {(mRect.x * (16 * SCALE_FACTOR)) - camera.x, (mRect.y * (16 * SCALE_FACTOR)) - camera.y, (16 * SCALE_FACTOR), (16 * SCALE_FACTOR)};
+    SDL_Rect rect {(mRect.x * TILE_WIDTH) - camera.x, (mRect.y * TILE_HEIGHT) - camera.y, TILE_WIDTH, TILE_HEIGHT};
     SDL_RenderDrawRect(gRenderer, &rect);
 }
 

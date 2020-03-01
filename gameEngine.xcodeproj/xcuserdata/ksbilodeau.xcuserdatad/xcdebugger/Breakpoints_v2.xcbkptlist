@@ -62,8 +62,8 @@
             filePath = "gameEngine/tile.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "52"
-            endingLineNumber = "52"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
             landmarkName = "KTilesheet::loadFromTexture(textureID, tileSizeX, tileSizeY)"
             landmarkType = "7">
             <Locations>
@@ -113,22 +113,6 @@
                   offsetFromSymbolStart = "1323">
                </Location>
             </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "C7B96023-8D91-45D4-B3F0-3B3035FF2DDD"
-            shouldBeEnabled = "No"
-            ignoreCount = "100000"
-            continueAfterRunningActions = "No"
-            filePath = "gameEngine/player.cpp"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "79"
-            endingLineNumber = "79"
-            landmarkName = "Player::update(event)"
-            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

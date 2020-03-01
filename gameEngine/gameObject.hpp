@@ -16,7 +16,7 @@ class GameObject
 {
 public:
     // Virtual deconstructor
-    virtual ~GameObject() = 0;
+    virtual ~GameObject() {};
     
     // Frees variables
     virtual void free() = 0;

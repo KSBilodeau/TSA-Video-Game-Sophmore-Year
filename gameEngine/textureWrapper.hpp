@@ -48,7 +48,7 @@ public:
     void modifyAlpha(Uint8 alpha);
     
     // Modify texture scale
-    void modifyTextureScale(double scale);
+    void modifyTextureScale(double xScale, double yScale);
     
     // Return texture's original dimensions
     int getWidth();
@@ -62,7 +62,7 @@ private:
     int mWidth, mHeight;
     
     // Texture scale factor
-    double mScale;
+    double mXScale, mYScale;
 };
 
 #endif /* textureWrapper_hpp */

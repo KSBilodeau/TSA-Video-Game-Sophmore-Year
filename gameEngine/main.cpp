@@ -11,14 +11,20 @@
 #include <SDL_image.h>
 #include <SDL_ttf.h>
 #include <SDL_mixer.h>
+#include <cmath>
 
 #include "main.hpp"
+#include "event.hpp"
+#include "textboxProcessor.hpp"
+#include "gameEventHandler.hpp"
 #include "sprite.hpp"
 #include "textureWrapper.hpp"
 #include "textureHandler.hpp"
+#include "textbox.hpp"
 #include "guiButtons.hpp"
 #include "clock.hpp"
 #include "block.hpp"
+#include "keyHandler.hpp"
 
 SDL_Window* gWindow = nullptr;
 
@@ -27,6 +33,8 @@ SDL_Renderer* gRenderer = nullptr;
 TTF_Font* gFont = nullptr;
 
 Mix_Music* gIntroMusic = nullptr;
+
+KeyHandler keyHanlder;
 
 Player gPlayer;
 
@@ -98,6 +106,9 @@ bool init()
                     printf("SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError());
                     success = false;
                 }
+                
+                // Start the key handler
+                keyHanlder.startKeyHandler();
             }
         }
     }
@@ -111,10 +122,26 @@ bool loadMedia()
     // Media import success flag
     bool success = true;
     
+    // Load fonts, music, etc...
+    gFont = TTF_OpenFont("DejaVuSans.ttf", 20);
+    if (gFont == nullptr)
+    {
+        printf("Game's font could not be loaded! SDL_ttf Error: %s\n", TTF_GetError());
+        success = false;
+    }
+    
+    gIntroMusic = Mix_LoadMUS("Game_Music.wav");
+    if (gIntroMusic == nullptr)
+    {
+        printf("Music could not be loaded! SDL_mixer Error: %s\n", Mix_GetError());
+        success = false;
+    }
+    
+    // Load images, videos, etc...
     KTexture testTexture;
     if (!testTexture.loadFromFile("background.png", 1))
     {
-        printf("Test texture could not be loaded!\n");
+        printf("Test texture could not be loaded! SDL_image Error: %s\n", IMG_GetError());
         success = false;
     }
     else
@@ -124,7 +151,7 @@ bool loadMedia()
     
     if (!testTexture.loadFromFile("sprites.png", 1))
     {
-        printf("Test texture could not be loaded!\n");
+        printf("Test texture could not be loaded! SDL_image Error: %s\n", IMG_GetError());
         success = false;
     }
     else
@@ -134,7 +161,7 @@ bool loadMedia()
     
     if (!testTexture.loadFromFile("redSheet.png", 1))
     {
-        printf("Test texture could not be loaded!\n");
+        printf("Test texture could not be loaded! SDL_image Error: %s\n", IMG_GetError());
         success = false;
     }
     else
@@ -144,7 +171,7 @@ bool loadMedia()
 
     if (!testTexture.loadFromFile("save.png", .9))
     {
-        printf("Test texture could not be loaded!\n");
+        printf("Test texture could not be loaded! SDL_image Error: %s\n", IMG_GetError());
         success = false;
     }
     else
@@ -154,7 +181,7 @@ bool loadMedia()
     
     if (!testTexture.loadFromFile("Tiles1.png", 3))
     {
-        printf("Test texture could not be loaded!\n");
+        printf("Test texture could not be loaded! SDL_image Error: %s\n", IMG_GetError());
         success = false;
     }
     else
@@ -164,7 +191,7 @@ bool loadMedia()
     
     if (!testTexture.loadFromFile("Player.jpg", 3))
     {
-        printf("Player texure could not be loaded!\n");
+        printf("Player texure could not be loaded! SDL_image Error: %s\n", IMG_GetError());
         success = false;
     }
     else
@@ -172,12 +199,24 @@ bool loadMedia()
         textureRegistry.registerTexture(5, testTexture);
     }
     
-    gIntroMusic = Mix_LoadMUS("Game_Music.wav");
-    if (gIntroMusic == nullptr)
+    if (!testTexture.loadFromFile("TextBox.png", 1.776))
     {
-        printf("Music could not be loaded!\n");
+        printf("Textbox texture could not be loaded! SDL_image Error: %s\n", IMG_GetError());
         success = false;
     }
+    else
+    {
+        textureRegistry.registerTexture(6, testTexture);
+    }
+    
+    SDL_Color color {0xFF, 0xFF, 0xFF, 0xFF};
+    if (!testTexture.loadFromString("Be wary of those who may bear light / For their souls may not be bright / Do not fight others out of spite / For it feeds the darkness\u0027 might", color))
+    {
+        printf("Text could not be loaded! SDL_image Error: %s\n", IMG_GetError());
+        success = false;
+    }
+    else
+        textureRegistry.registerTexture(7, testTexture);
     
     return success;
 }
@@ -186,6 +225,29 @@ void close()
 {
     // Free all textures that have not already been freed
     textureRegistry.freeAll();
+    
+    // Destroy font
+    TTF_CloseFont(gFont);
+    
+    // Free music
+    Mix_FreeMusic(gIntroMusic);
+    Mix_CloseAudio();
+    
+    // Free renderer
+    SDL_DestroyRenderer(gRenderer);
+    // Free window
+    SDL_DestroyWindow(gWindow);
+    
+    // Set all pointers back to null
+    gWindow = nullptr;
+    gRenderer = nullptr;
+    gFont = nullptr;
+    gIntroMusic = nullptr;
+    
+    // Close SDL subsystems
+    IMG_Quit();
+    SDL_Quit();
+    Mix_Quit();
 }
 
 int main(int argc, const char * argv[])
@@ -235,14 +297,15 @@ int main(int argc, const char * argv[])
         
         tiles.loadFromTexture(4, 16, 16);
         
-        KBlock block;
-        block.loadDefaultTile(tiles.requestAccess(std::make_pair(0, 1)));
-        block.setBlockPosition(0, 0);
-        
-//        ArrowKeys arrKeys;
-        
         gMap.loadMap();
         
+        Textbox textbox;
+        textbox.createTextbox(textureRegistry.requestAccess(6), textureRegistry.requestAccess(7), (SCREEN_WIDTH / 2) - (textureRegistry.requestAccess(6)->getWidth() * 1.776 / 2), (SCREEN_HEIGHT / 1.20) - (textureRegistry.requestAccess(6)->getHeight() * 1.776 / 2));
+        
+        TextboxEventProcessor textboxProcessor;
+        textboxProcessor.loadTextboxSequenceFromFile("textboxSequences.txt");
+        textboxProcessor.runTextboxSequence(0);
+            
         while (isRunning)
         {
             capTimer.start();
@@ -252,18 +315,22 @@ int main(int argc, const char * argv[])
                 if (event.type == SDL_QUIT)
                     isRunning = false;
                 
+                if (event.type == SDL_KEYDOWN)
+                {
+                    if (keyHanlder.queryKeyState(SDL_SCANCODE_P))
+                        Mix_PlayMusic(gIntroMusic, 1);
+                }
+                
                 if (event.type == SDL_MOUSEBUTTONDOWN)
                     button.handleMouseClick(event);
                 else if (event.type == SDL_MOUSEBUTTONUP && !button.handleMouseClick(event))
                     button.lambdaActivate(button.getButtonState());
-                else
-                    block.handleMouseClick(event);
-            
-                if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_p)
-                    Mix_PlayMusic(gIntroMusic, 1);
+                
                 
                 gPlayer.update(event);
-                gMap.update(event);
+                textboxProcessor.updateCurrentEvent(event);
+//                textbox.handleMouseClick(event);
+//                gMap.update(event);
             }
             
             avgFPS = countedFrames / (fpsTimer.getTicks() / 1000.0f);
@@ -273,13 +340,16 @@ int main(int argc, const char * argv[])
             SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
             SDL_RenderClear(gRenderer);
             
-//            block.render();
             gMap.render();
             button.render();
                         
             gPlayer.move();
             gPlayer.render();
             
+//            textbox.render();
+            textboxProcessor.renderCurrentEvent();
+//            textureRegistry.requestAccess(8)->render(0, 0, true);
+                        
             SDL_RenderPresent(gRenderer);
             SDL_RenderClear(gRenderer);
             
@@ -289,7 +359,7 @@ int main(int argc, const char * argv[])
             if (frameTicks < 1000 / 61)
                 SDL_Delay((1000 / 61) - frameTicks);
             
-            std::cout << avgFPS << '\n';
+//            std::cout << avgFPS << '\n';
         }
     }
     catch (TextureAccessException e)
@@ -298,5 +368,21 @@ int main(int argc, const char * argv[])
     }
     
     close();
+    
+//    GameEventHandler eventHandler;
+//
+//    std::shared_ptr<OneTimeEvent> event = std::make_shared<OneTimeEvent>();
+//    event->eventID = 0;
+//
+//    std::shared_ptr<MultiTriggerEvent> event2 = std::make_shared<MultiTriggerEvent>();
+//    event2->eventID = 0;
+//    event2->infininteRepeat = true;
+//
+//    eventHandler.registerEvent<OneTimeEvent>(event);
+//    eventHandler.registerEvent<MultiTriggerEvent>(event2);
+//
+//    for (std::pair<int, std::shared_ptr<Event>> mappedEvent : eventHandler.getEvents())
+//        printf("storageID: %i  defaultEventType: %i  pointerType: %i\n", mappedEvent.first, EventType::event, mappedEvent.second->getType());
+    
     return 0;
 }

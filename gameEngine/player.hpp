@@ -81,6 +81,14 @@ private:
     int xVelocity;
     int yVelocity;
     
+    // Bools for which axis the player is moving on
+    bool movingX, movingY;
+    
+    // False for left, true for right
+    bool xVelocityDirection;
+    // False for up, true for down
+    bool yVelocityDirection;
+    
     // TODO: Remember what this variable does exactly
     // I think this variable is used for movement normalization, but not completely sure
     int ticks;

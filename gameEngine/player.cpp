@@ -20,10 +20,13 @@ Player::Player()
         for (int x = 0; x < (sizeof(mClipRects[y]) / sizeof(*mClipRects[y])); x++)
             mClipRects[y][x] = {0, 0, 0, 0};
     
+    xVelocityDirection = false;
+    yVelocityDirection = false;
+    
     mBlockX = 0;
     mBlockY = 0;
     
-    speed = 5;
+    speed = 4;
     
     xVelocity = 0;
     yVelocity = 0;
@@ -63,8 +66,8 @@ void Player::createPlayer(std::shared_ptr<KTexture> texture, int spriteSizeX, in
     mRect.x = startingRect.x;
     mRect.y = startingRect.y;
     
-    mRect.w = spriteSizeX;
-    mRect.h = spriteSizeY;
+    mRect.w = startingRect.w;
+    mRect.h = startingRect.h;
 }
 
 void Player::update(SDL_Event &event)
@@ -73,13 +76,13 @@ void Player::update(SDL_Event &event)
     if (event.type == SDL_KEYDOWN && event.key.repeat == 0)
     {
         // Forwards keys are W and UP ARROW
-        if (event.key.keysym.sym == SDLK_w || event.key.keysym.sym == SDLK_UP)
+        if ((event.key.keysym.sym == SDLK_w || event.key.keysym.sym == SDLK_UP) && yVelocity == 0)
         {
             yVelocity -= speed;
             mDirection = 2;
         }
         // Down keys are S and DOWN ARROW
-        else if (event.key.keysym.sym == SDLK_s || event.key.keysym.sym == SDLK_DOWN)
+        else if ((event.key.keysym.sym == SDLK_s || event.key.keysym.sym == SDLK_DOWN) && yVelocity == 0)
         {
             yVelocity += speed;
             mDirection = 3;
@@ -97,6 +100,7 @@ void Player::update(SDL_Event &event)
             mDirection = 0;
         }
     }
+    
     // Checks if key has been released
     if (event.type == SDL_KEYUP && event.key.repeat == 0)
     {
@@ -121,25 +125,56 @@ void Player::render()
     mTexture->render(mRect.x, mRect.y, false, &mClipRects[mDirection][mCurrentSprite]);
     
     // Draws players noncollision rectangle
-    SDL_Rect noncollisionRect {mRect.x - camera.x, mRect.y - camera.y, mRect.w * SCALE_FACTOR, mRect.h * SCALE_FACTOR};
-    SDL_RenderDrawRect(gRenderer, &noncollisionRect);
+//    SDL_Rect noncollisionRect {mRect.x - camera.x, mRect.y - camera.y, mRect.w, mRect.h};
+//    SDL_RenderDrawRect(gRenderer, &noncollisionRect);
 }
 
 void Player::move()
 {
-    // Move player along the x-axis
-    mRect.x += xVelocity;
-    
-    // Move player along the y-axis
-    mRect.y += yVelocity;
-    
     if (xVelocity != 0 || yVelocity != 0)
         isMoving = true;
     else
         isMoving = false;
     
+    if (xVelocity != 0)
+        movingX = true;
+    else
+        movingX = false;
+    
+    if (yVelocity != 0)
+        movingY = true;
+    else
+        movingY = false;
+    
     if (isMoving)
     {
+        if (movingX)
+        {
+            if (xVelocity < 0 && mDirection != 1)
+                mDirection = 1;
+            else if (xVelocity > 0 && mDirection != 0)
+                mDirection = 0;
+        }
+        else if (movingY)
+        {
+            if (yVelocity < 0 && mDirection != 2)
+                mDirection = 2;
+            else if (yVelocity > 0 && mDirection != 3)
+                mDirection = 3;
+        }
+        
+        // Move player along the x-axis
+        mRect.x += xVelocity;
+        
+        if (gMap.checkCollision(std::make_pair(mBlockX, mBlockY), mRect))
+            mRect.x -= xVelocity;
+        
+        // Move player along the y-axis
+        mRect.y += yVelocity;
+        
+        if (gMap.checkCollision(std::make_pair(mBlockX, mBlockY), mRect))
+            mRect.y -= yVelocity;
+        
         if (!(mCurrentSprite < 7))
             mCurrentSprite = 0;
         else if (ticks % 5 == 0)
