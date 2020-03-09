@@ -14,7 +14,10 @@ enum EventType
     event,
     oneTimeEvent,
     multiTriggerEvent,
-    textboxTriggerEvent
+    textboxEvent,
+    multiTriggerTexboxEvent,
+    tileCollisionEvent,
+    multiTriggerTileCollisionEvent
 };
 
 // Base event type from which all other events inherit from
@@ -94,10 +97,10 @@ typedef struct MultiTriggerEvent : Event
 // TODO: AKA DIFFERENT COLORED BOXES FOR EACH CHARACTER OR MAYBE PORTRAITS?
 // This struct will notify the textbox handler to display a series of textboxes based of
 // the events id
-typedef struct TextboxTriggerEvent : OneTimeEvent
+typedef struct TextboxEvent : OneTimeEvent
 {
     // Constructor required for make_shared
-    TextboxTriggerEvent() : OneTimeEvent()
+    TextboxEvent() : OneTimeEvent()
     {
         textboxGroupID = 0;
     }
@@ -109,8 +112,51 @@ typedef struct TextboxTriggerEvent : OneTimeEvent
     // Returns the enum of its type
     EventType getType() override
     {
-        return  EventType::textboxTriggerEvent;
+        return  EventType::textboxEvent;
     }
-} TextboxTriggerEvent;
+} TextboxEvent;
+
+typedef struct MultiTriggerTextboxEvent : MultiTriggerEvent
+{
+    // Make shared requires a constructor
+    MultiTriggerTextboxEvent() : MultiTriggerEvent()
+    {
+        textboxGroupID = 0;
+    }
+    
+    // Indicates which series of texboxes to trigger
+    int textboxGroupID;
+    
+    // Returns the enum of its type
+    EventType getType() override
+    {
+        return EventType::multiTriggerTexboxEvent;
+    }
+} MultiTriggerTextboxEvent;
+
+typedef struct TileCollisionEvent : OneTimeEvent
+{
+    TileCollisionEvent() : OneTimeEvent()
+    {
+        attachedEventID = 0;
+    }
+    
+    // Storage ID of the event attached
+    int attachedEventID;
+    
+    // Type of the attached event
+    EventType attachedEventType;
+    
+    EventType getType() override
+    {
+        return EventType::tileCollisionEvent;
+    }
+    
+} TileCollisionEvent;
+
+typedef struct MultiTriggerTileCollisionEvent : MultiTriggerEvent
+{
+    
+} MultiTriggerTileCollisionEvent;
 
 #endif /* event_h */

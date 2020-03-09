@@ -23,9 +23,15 @@ TextboxEventProcessor::~TextboxEventProcessor()
     textboxSequences.clear();
 }
 
-void TextboxEventProcessor::registerTextbox(std::shared_ptr<TextboxSequence> &textbox)
+void TextboxEventProcessor::registerTextboxSequence(std::shared_ptr<TextboxSequence> &textbox)
 {
     textboxSequences.insert(std::make_pair(textboxSequences.size(), textbox));
+    
+    TextboxEvent event;
+    event.textboxGroupID = ((int) textboxSequences.size()) - 1;
+    
+    std::shared_ptr<TextboxEvent> temp = std::make_shared<TextboxEvent>(event);
+    eventHandler.registerEvent(temp);
 }
 
 bool TextboxEventProcessor::loadTextboxSequenceFromFile(std::string path)
@@ -53,7 +59,7 @@ bool TextboxEventProcessor::loadTextboxSequenceFromFile(std::string path)
     {
         getline(input, line);
         
-        if (line.compare(((std::string) ("SEQUENCE END " + line))) == 0)
+        if (line.find("SEQUENCE END") != std::string::npos)
             break;
         if (line.find('\"') != std::string::npos)
         {
@@ -77,7 +83,7 @@ bool TextboxEventProcessor::loadTextboxSequenceFromFile(std::string path)
     {
         sequencePtr->numOfTextboxes = (int) textboxes.size();
         sequencePtr->attachTextbox(textboxes);
-        registerTextbox(sequencePtr);
+        registerTextboxSequence(sequencePtr);
     }
     
     return success;
@@ -91,7 +97,7 @@ bool TextboxEventProcessor::loadAllSequencesFromFile(std::string path)
     return success;
 }
 
-void TextboxEventProcessor::updateCurrentEvent(SDL_Event &event)
+bool TextboxEventProcessor::updateCurrentEvent(SDL_Event &event)
 {
     if (currentSequence != nullptr)
     {
@@ -99,7 +105,12 @@ void TextboxEventProcessor::updateCurrentEvent(SDL_Event &event)
         
         if (check)
             currentSequence->increment();
+        
+        return check;
     }
+    
+    
+    return false;
 }
 
 void TextboxEventProcessor::renderCurrentEvent()
@@ -116,10 +127,13 @@ void TextboxEventProcessor::runTextboxSequence(int sequenceID)
     if (currentSequence == nullptr)
     {
         if (!textboxSequences[sequenceID]->complete)
-            currentSequence = textboxSequences[sequenceID];
+            currentSequence = std::make_shared<TextboxSequence>(*textboxSequences[sequenceID].get());
+        else
+            currentSequence = nullptr;
     }
-    else
+    else if (currentSequence->complete)
     {
         currentSequence = nullptr;
+        runTextboxSequence(sequenceID);
     }
 }

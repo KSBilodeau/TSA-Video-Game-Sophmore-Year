@@ -4,6 +4,5 @@ SEQUENCE START 1
 "How are you?"
 "I'm doing great!"
 "Well, that's just fantastic!!"
-"How about you?"
-"Oh pretty good!"
 SEQUENCE END 1
+

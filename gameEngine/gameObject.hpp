@@ -24,7 +24,8 @@ public:
     // Renders game object to screen
     virtual void render() = 0;
     
-    // Updates game object
+    // Updates game object for non click relate SDL Events
+    // TODO: REMOVE THE SDL_EVENT PART I DON'T USE IT
     virtual void update(SDL_Event &event) = 0;
     
     // Handle mouse clicks in relation to game object

@@ -75,6 +75,21 @@ void KBlock::handleMouseClick(SDL_Event &event)
     }
 }
 
+ void KBlock::attachTileCollsionEvent(int x, int y, int &id, int &storageID, EventType eventType)
+{
+    if (mMappedTiles.count(std::make_pair(x, y)) == 0)
+    {
+        tiles.requestAccess(selectedTileID)->moveTo(x * TILE_WIDTH, y * TILE_HEIGHT);
+        tiles.requestAccess(selectedTileID)->setCollidable(true);
+        mMappedTiles.insert(std::make_pair(std::make_pair(x, y), *tiles.requestAccess(selectedTileID).get()));
+        tiles.requestAccess(selectedTileID)->setCollidable(false);
+    }
+    
+    mMappedTiles.at(std::make_pair(x, y)).attachEvent(id, storageID, eventType);
+    
+    tiles.requestAccess(selectedTileID)->setDefault(true);
+}
+
 bool KBlock::isEmpty()
 {
     return mMappedTiles.empty();

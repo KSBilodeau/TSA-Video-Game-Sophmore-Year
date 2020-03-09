@@ -10,12 +10,16 @@
 		860174B523FEF0C60044EF18 /* textbox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 860174B323FEF0C60044EF18 /* textbox.cpp */; };
 		860174BF23FEF2540044EF18 /* keyHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 860174BD23FEF2540044EF18 /* keyHandler.cpp */; };
 		860174C223FEF2C90044EF18 /* gameEventHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 860174C023FEF2C90044EF18 /* gameEventHandler.cpp */; };
+		860396282410619B00319537 /* Tiles1-1.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 860396272410619100319537 /* Tiles1-1.png */; };
+		8603962B2410702100319537 /* textboxSequences2.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8603962A2410701800319537 /* textboxSequences2.txt */; };
 		862D6D0523F344E3007B1645 /* TextBoxBack.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 862D6D0423F344CB007B1645 /* TextBoxBack.jpg */; };
+		8635ADF12416B52000044BA5 /* specialTileCollisions2.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8635ADF02416B51000044BA5 /* specialTileCollisions2.txt */; };
 		8636CC2123CB98B900C758E2 /* map.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8636CC1F23CB98B900C758E2 /* map.cpp */; };
 		8636CC2423CB99CC00C758E2 /* block.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8636CC2223CB99CC00C758E2 /* block.cpp */; };
 		8636CC2723CB99D800C758E2 /* tile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8636CC2523CB99D800C758E2 /* tile.cpp */; };
 		8636CC2923CBE9D000C758E2 /* Tiles1.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8636CC2823CBE9C800C758E2 /* Tiles1.png */; };
 		86398AE8240012FB00FFAE5B /* magicBoomerang.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86398AE6240012FB00FFAE5B /* magicBoomerang.cpp */; };
+		863A40A8240DC39400127CFB /* tileCollisionProcessor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 863A40A6240DC39400127CFB /* tileCollisionProcessor.cpp */; };
 		864CE5EC23F1FC0E004C1613 /* Player.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 864CE5EB23F1FC09004C1613 /* Player.jpg */; };
 		8672A0A923CD18BB00201E77 /* player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8672A0A723CD18BB00201E77 /* player.cpp */; };
 		86732EB823DB5A6800523368 /* Angel_Music.wav in CopyFiles */ = {isa = PBXBuildFile; fileRef = 86732EB723DB5A5500523368 /* Angel_Music.wav */; };
@@ -24,6 +28,7 @@
 		868981DF23C402A300835B52 /* red_panel.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 868981DE23C4029A00835B52 /* red_panel.png */; };
 		868981E123C4030B00835B52 /* red_button04.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 868981E023C4030300835B52 /* red_button04.png */; };
 		868981E423C409CF00835B52 /* save.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 868981E223C4038700835B52 /* save.png */; };
+		868DBE5324102DB600E1EEEA /* specialTileCollisions.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 863A40A2240D983700127CFB /* specialTileCollisions.txt */; };
 		869E60D423C699FD007D176D /* redSheet.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 869E60D323C69948007D176D /* redSheet.png */; };
 		86C3013023BA993E007313D2 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86C3012F23BA993E007313D2 /* main.cpp */; };
 		86C9193C23BAA43C00D86191 /* textureWrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86C9193A23BAA43C00D86191 /* textureWrapper.cpp */; };
@@ -49,8 +54,12 @@
 			files = (
 				868981DF23C402A300835B52 /* red_panel.png in CopyFiles */,
 				864CE5EC23F1FC0E004C1613 /* Player.jpg in CopyFiles */,
+				860396282410619B00319537 /* Tiles1-1.png in CopyFiles */,
 				86CE5FBD23F48C8A0081A402 /* TextBox.png in CopyFiles */,
 				86DF017D2408B91800B2D8C9 /* textboxSequences.txt in CopyFiles */,
+				868DBE5324102DB600E1EEEA /* specialTileCollisions.txt in CopyFiles */,
+				8635ADF12416B52000044BA5 /* specialTileCollisions2.txt in CopyFiles */,
+				8603962B2410702100319537 /* textboxSequences2.txt in CopyFiles */,
 				86732EBA23DB5C8100523368 /* Game_Music.wav in CopyFiles */,
 				86CE5FBF23F5DA640081A402 /* DejaVuSans.ttf in CopyFiles */,
 				862D6D0523F344E3007B1645 /* TextBoxBack.jpg in CopyFiles */,
@@ -73,7 +82,10 @@
 		860174BE23FEF2540044EF18 /* keyHandler.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = keyHandler.hpp; sourceTree = "<group>"; };
 		860174C023FEF2C90044EF18 /* gameEventHandler.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = gameEventHandler.cpp; sourceTree = "<group>"; };
 		860174C123FEF2C90044EF18 /* gameEventHandler.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = gameEventHandler.hpp; sourceTree = "<group>"; };
+		860396272410619100319537 /* Tiles1-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Tiles1-1.png"; sourceTree = "<group>"; };
+		8603962A2410701800319537 /* textboxSequences2.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = textboxSequences2.txt; sourceTree = "<group>"; };
 		862D6D0423F344CB007B1645 /* TextBoxBack.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = TextBoxBack.jpg; sourceTree = "<group>"; };
+		8635ADF02416B51000044BA5 /* specialTileCollisions2.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = specialTileCollisions2.txt; sourceTree = "<group>"; };
 		8636CC1F23CB98B900C758E2 /* map.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = map.cpp; sourceTree = "<group>"; };
 		8636CC2023CB98B900C758E2 /* map.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = map.hpp; sourceTree = "<group>"; };
 		8636CC2223CB99CC00C758E2 /* block.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = block.cpp; sourceTree = "<group>"; };
@@ -83,6 +95,9 @@
 		8636CC2823CBE9C800C758E2 /* Tiles1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Tiles1.png; sourceTree = "<group>"; };
 		86398AE6240012FB00FFAE5B /* magicBoomerang.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = magicBoomerang.cpp; sourceTree = "<group>"; };
 		86398AE7240012FB00FFAE5B /* magicBoomerang.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = magicBoomerang.hpp; sourceTree = "<group>"; };
+		863A40A2240D983700127CFB /* specialTileCollisions.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = specialTileCollisions.txt; sourceTree = "<group>"; };
+		863A40A6240DC39400127CFB /* tileCollisionProcessor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tileCollisionProcessor.cpp; sourceTree = "<group>"; };
+		863A40A7240DC39400127CFB /* tileCollisionProcessor.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tileCollisionProcessor.hpp; sourceTree = "<group>"; };
 		864CE5EB23F1FC09004C1613 /* Player.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Player.jpg; sourceTree = "<group>"; };
 		8672A0A723CD18BB00201E77 /* player.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = player.cpp; sourceTree = "<group>"; };
 		8672A0A823CD18BB00201E77 /* player.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = player.hpp; sourceTree = "<group>"; };
@@ -258,6 +273,7 @@
 				86732EB723DB5A5500523368 /* Angel_Music.wav */,
 				86732EB923DB5C7600523368 /* Game_Music.wav */,
 				8636CC2823CBE9C800C758E2 /* Tiles1.png */,
+				860396272410619100319537 /* Tiles1-1.png */,
 				86CE5FBC23F48C650081A402 /* TextBox.png */,
 				864CE5EB23F1FC09004C1613 /* Player.jpg */,
 				868981E223C4038700835B52 /* save.png */,
@@ -267,6 +283,9 @@
 				868981D823C020E400835B52 /* sprites.png */,
 				86C9196623BC048E00D86191 /* background.png */,
 				86DF017C24087BB800B2D8C9 /* textboxSequences.txt */,
+				8603962A2410701800319537 /* textboxSequences2.txt */,
+				863A40A2240D983700127CFB /* specialTileCollisions.txt */,
+				8635ADF02416B51000044BA5 /* specialTileCollisions2.txt */,
 			);
 			path = resources;
 			sourceTree = "<group>";
@@ -296,6 +315,8 @@
 			children = (
 				86DF0179240879B100B2D8C9 /* textboxProcessor.cpp */,
 				86DF017A240879B100B2D8C9 /* textboxProcessor.hpp */,
+				863A40A6240DC39400127CFB /* tileCollisionProcessor.cpp */,
+				863A40A7240DC39400127CFB /* tileCollisionProcessor.hpp */,
 			);
 			name = eventProcessors;
 			sourceTree = "<group>";
@@ -358,6 +379,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				860174BF23FEF2540044EF18 /* keyHandler.cpp in Sources */,
+				863A40A8240DC39400127CFB /* tileCollisionProcessor.cpp in Sources */,
 				860174B523FEF0C60044EF18 /* textbox.cpp in Sources */,
 				86C9195823BAB77300D86191 /* spritesheet.cpp in Sources */,
 				86C3013023BA993E007313D2 /* main.cpp in Sources */,

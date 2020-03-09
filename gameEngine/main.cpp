@@ -36,6 +36,10 @@ Mix_Music* gIntroMusic = nullptr;
 
 KeyHandler keyHanlder;
 
+GameEventHandler eventHandler;
+TextboxEventProcessor textboxProcessor;
+TileCollisionProcessor tileProcessor;
+
 Player gPlayer;
 
 KMap gMap;
@@ -46,7 +50,7 @@ KTilesheet tiles;
 
 SDL_Rect camera;
 
-std::pair<int, int> selectedTileID;
+std::pair<int, int> selectedTileID {6, 2};
 
 bool init()
 {
@@ -179,7 +183,7 @@ bool loadMedia()
         textureRegistry.registerTexture(3, testTexture);
     }
     
-    if (!testTexture.loadFromFile("Tiles1.png", 3))
+    if (!testTexture.loadFromFile("Tiles1-1.png", 3))
     {
         printf("Test texture could not be loaded! SDL_image Error: %s\n", IMG_GetError());
         success = false;
@@ -302,10 +306,31 @@ int main(int argc, const char * argv[])
         Textbox textbox;
         textbox.createTextbox(textureRegistry.requestAccess(6), textureRegistry.requestAccess(7), (SCREEN_WIDTH / 2) - (textureRegistry.requestAccess(6)->getWidth() * 1.776 / 2), (SCREEN_HEIGHT / 1.20) - (textureRegistry.requestAccess(6)->getHeight() * 1.776 / 2));
         
-        TextboxEventProcessor textboxProcessor;
         textboxProcessor.loadTextboxSequenceFromFile("textboxSequences.txt");
-        textboxProcessor.runTextboxSequence(0);
+        textboxProcessor.loadTextboxSequenceFromFile("textboxSequences2.txt");
+//        textboxProcessor.runTextboxSequence(0);
+//        eventHandler.triggerEvent(0, EventType::textboxEvent);
+        
+        tileProcessor.loadEventsFromFile("specialTileCollisions.txt");
+        tileProcessor.loadEventsFromFile("specialTileCollisions2.txt");
             
+        SDL_Rect test {0, 0, 30, 30};
+        SDL_Texture* texture = SDL_CreateTexture(gRenderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, 30, 30);
+        SDL_SetRenderTarget(gRenderer, texture);
+        SDL_RenderDrawRect(gRenderer, &test);
+        SDL_SetRenderTarget(gRenderer, NULL);
+        
+        test.x = 375;
+        test.y = 375;
+        
+        int speed = 1;
+        int angle = 60;
+        int direction = 1;
+        double degrees = 0;
+        SDL_Point point;
+        point.x = test.w / 2;
+        point.y = test.h / 2;
+        
         while (isRunning)
         {
             capTimer.start();
@@ -326,12 +351,20 @@ int main(int argc, const char * argv[])
                 else if (event.type == SDL_MOUSEBUTTONUP && !button.handleMouseClick(event))
                     button.lambdaActivate(button.getButtonState());
                 
-                
                 gPlayer.update(event);
-                textboxProcessor.updateCurrentEvent(event);
-//                textbox.handleMouseClick(event);
-//                gMap.update(event);
+                
+                if (!textboxProcessor.updateCurrentEvent(event))
+                    gMap.update(event);
             }
+            
+//            int x, y;
+//            SDL_GetMouseState(&x, &y);
+//
+//            std::string mousePos = std::string("mouseX: " + std::to_string((int) std::floor(((double) (x + camera.y)) / 48.0)) + " mouseY: " + std::to_string((int) std::floor(((double) (y + camera.y)) / 48.0)));
+//
+//            SDL_Color black {0x00, 0x00, 0x00, 0xFF};
+//            SDL_Surface* mouse = TTF_RenderText_Solid(gFont, mousePos.c_str(), black);
+//            SDL_Texture* mouseTex = SDL_CreateTextureFromSurface(gRenderer, mouse);
             
             avgFPS = countedFrames / (fpsTimer.getTicks() / 1000.0f);
             if (avgFPS > 2000000)
@@ -350,6 +383,15 @@ int main(int argc, const char * argv[])
             textboxProcessor.renderCurrentEvent();
 //            textureRegistry.requestAccess(8)->render(0, 0, true);
                         
+//            SDL_Rect rect {SCREEN_WIDTH - 202, 0, 200, 50};
+//            SDL_RenderCopy(gRenderer, mouseTex, NULL, &rect);
+        
+            if ((test.x > 750 || test.y > 750) || (test.x < 0 || test.y < 0))
+                direction *= -1;
+            test.x += direction * std::ceil((double) (speed * std::cos((angle * (M_PI / 180)))));
+            test.y += direction * std::ceil((double) (speed * std::sin((angle * (M_PI / 180)))));
+            SDL_RenderCopyEx(gRenderer, texture, NULL, &test, degrees, &point, SDL_FLIP_NONE);
+            
             SDL_RenderPresent(gRenderer);
             SDL_RenderClear(gRenderer);
             
@@ -360,6 +402,7 @@ int main(int argc, const char * argv[])
                 SDL_Delay((1000 / 61) - frameTicks);
             
 //            std::cout << avgFPS << '\n';
+            degrees += 4;
         }
     }
     catch (TextureAccessException e)

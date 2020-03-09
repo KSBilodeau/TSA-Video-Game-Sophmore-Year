@@ -45,6 +45,9 @@ public:
     // Erases block at specific block coords if there is anything there
     void eraseBlock(std::pair<int, int> coords);
     
+    // Attach tile event
+    void attachTileCollisionEvent(int &x, int &y, int &id, int &storageID, EventType eventType);
+    
     // Clears map of all mapped tiles
     void clearMap();
     

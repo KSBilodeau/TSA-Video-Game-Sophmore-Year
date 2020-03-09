@@ -24,10 +24,27 @@ public:
     ~KBoomerang();
     
     // Delete boomerang
-    void free();
+    void free() override;
     
     // Create boomerang
-    void createBoomerang(std::shared_ptr<KTexture> boomerangTexture);
+    void createBoomerang(SDL_Color color);
+    
+    void update(SDL_Event &event) override;
+    
+    void render() override;
+    
+    bool handleMouseClick(SDL_Event &event) override;
+    
+private:
+    // Angle the projectile was sent
+    double mVelAngle;
+    // Angle that the sprite is rotated
+    double mRotateAngle;
+    
+    // Color of the projectile
+    SDL_Color color;
+    // Collision rectangle for projectile
+    SDL_Rect mRect;
 };
 
 #endif /* magicBoomerang_hpp */

@@ -78,8 +78,8 @@ private:
     int speed;
     
     // Player's movement position
-    int xVelocity;
-    int yVelocity;
+    double xVelocity;
+    double yVelocity;
     
     // Bools for which axis the player is moving on
     bool movingX, movingY;

@@ -14,6 +14,7 @@
 #include <vector>
 
 #include "textureWrapper.hpp"
+#include "event.hpp"
 
 #include <boost/serialization/serialization.hpp>
 #include <SDL.h>
@@ -45,7 +46,7 @@ public:
         ar & mClipRect.h;
         
         ar & textureID;
-        ar & collidable;
+        ar & mCollidable;
     }
     
     // Sets tile to new texture
@@ -60,12 +61,44 @@ public:
     // Checks if tile is colliding with another rectangle
     bool checkCollision(SDL_Rect &rect1, SDL_Rect &rect2);
     
+    // Changes isEventAttached flag to true and passes the attached event id to the tile
+    void attachEvent(int attachedEventID, int storageID, EventType attachedEventType);
+    
+    // Sets a tile collidable
+    void setCollidable(bool isCollidable);
+    
+    // Sets a tile to its default form (For adding non event based tiles)
+    void setDefault(bool collidable);
+    
     // Return tile dimensions
     SDL_Rect &getRectangle();
+    
+    // Returns true if this tile has an event attached to it
+    bool &getIsEventAttached();
+    
+    // If event attached, returns the ID of the attached event
+    int &getEventID();
     
 private:
     // Base texture for tile
     std::shared_ptr<KTexture> mTexture;
+    
+    // Indicates if an event is attached
+    // true if there is, false if not
+    bool isEventAttached;
+    
+    // If there is an event attached, then this value will equal a value > 0
+    // Otherwise, it will equal -1
+    int mAttachedEventID;
+    
+    // The ID of the tile collision event
+    int mTileEventID;
+    
+    // Actual event storage ID
+    int mStorageID;
+    
+    // The type of event attached
+    EventType eventType;
     
     // Tiles rectangle
     SDL_Rect mRect;
@@ -77,7 +110,7 @@ private:
     int textureID;
     
     // Stores if the tile is collidable
-    bool collidable;
+    bool mCollidable;
 };
 
 class KTilesheet

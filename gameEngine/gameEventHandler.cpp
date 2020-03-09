@@ -7,6 +7,7 @@
 //
 
 #include "gameEventHandler.hpp"
+#include "main.hpp"
 
 GameEventHandler::GameEventHandler()
 {
@@ -47,6 +48,20 @@ void GameEventHandler::removeEvent(int eventID, EventType event)
     
     if (itemFound)
         events.erase(removalIndex);
+}
+
+void GameEventHandler::handleTileCollisionEvent(int &storageID)
+{
+    if (((TileCollisionEvent*) events[storageID].get())->attachedEventType == EventType::textboxEvent)
+        tileProcessor.triggerEvent(((TileCollisionEvent*) events[storageID].get())->attachedEventID);
+}
+
+void GameEventHandler::triggerEvent(int storageID, EventType eventType)
+{
+    if (eventType == EventType::textboxEvent)
+        textboxProcessor.runTextboxSequence(((TextboxEvent*) (events.at(storageID).get()))->textboxGroupID);
+    if (eventType == EventType::tileCollisionEvent)
+        handleTileCollisionEvent(storageID);
 }
 
 std::map<int, std::shared_ptr<Event>> &GameEventHandler::getEvents()

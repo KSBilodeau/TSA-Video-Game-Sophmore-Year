@@ -56,11 +56,15 @@ public:
     template<typename E>
     void registerEvent(std::shared_ptr<E> &e)
     {
+        ((std::shared_ptr<Event>) e)->eventID = (int) events.size();
         events.insert(std::make_pair(events.size(), e));
     }
     
     // Handles event triggers
-    void triggerEvent(int eventID, int eventType);
+    void triggerEvent(int storageID, EventType eventType);
+    
+    // Special function for handling tile collision events
+    void handleTileCollisionEvent(int &storageID);
     
     std::map<int, std::shared_ptr<Event>> &getEvents();
     

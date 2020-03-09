@@ -6,6 +6,7 @@
 //  Copyright © 2020 Keegan Bilodeau. All rights reserved.
 //
 #include <cmath>
+#include <iostream>
 
 #include "player.hpp"
 #include "main.hpp"
@@ -76,27 +77,27 @@ void Player::update(SDL_Event &event)
     if (event.type == SDL_KEYDOWN && event.key.repeat == 0)
     {
         // Forwards keys are W and UP ARROW
-        if ((event.key.keysym.sym == SDLK_w || event.key.keysym.sym == SDLK_UP) && yVelocity == 0)
+        if (event.key.keysym.sym == SDLK_w)
         {
-            yVelocity -= speed;
+            yVelocity -= 1.0;
             mDirection = 2;
         }
         // Down keys are S and DOWN ARROW
-        else if ((event.key.keysym.sym == SDLK_s || event.key.keysym.sym == SDLK_DOWN) && yVelocity == 0)
+        else if (event.key.keysym.sym == SDLK_s)
         {
-            yVelocity += speed;
+            yVelocity += 1.0;
             mDirection = 3;
         }
         // Left keys are A and LEFT ARROW
-        else if (event.key.keysym.sym == SDLK_a || event.key.keysym.sym == SDLK_LEFT)
+        else if (event.key.keysym.sym == SDLK_a)
         {
-            xVelocity -= speed;
+            xVelocity -= 1.0;
             mDirection = 1;
         }
         // Right keys are D and RIGHT ARROW
-        else if (event.key.keysym.sym == SDLK_d || event.key.keysym.sym == SDLK_RIGHT)
+        else if (event.key.keysym.sym == SDLK_d)
         {
-            xVelocity += speed;
+            xVelocity += 1.0;
             mDirection = 0;
         }
     }
@@ -105,17 +106,17 @@ void Player::update(SDL_Event &event)
     if (event.type == SDL_KEYUP && event.key.repeat == 0)
     {
         // Forwards keys are W and UP ARROW
-        if (event.key.keysym.sym == SDLK_w || event.key.keysym.sym == SDLK_UP)
-            yVelocity += speed;
+        if (event.key.keysym.sym == SDLK_w)
+            yVelocity += 1.0;
         // Down keys are S and DOWN ARROW
-        else if (event.key.keysym.sym == SDLK_s || event.key.keysym.sym == SDLK_DOWN)
-            yVelocity -= speed;
+        else if (event.key.keysym.sym == SDLK_s)
+            yVelocity -= 1.0;
         // Left keys are A and LEFT ARROW
-        else if (event.key.keysym.sym == SDLK_a || event.key.keysym.sym == SDLK_LEFT)
-            xVelocity += speed;
+        else if (event.key.keysym.sym == SDLK_a)
+            xVelocity += 1.0;
         // Right keys are D and RIGHT ARROW
-        else if (event.key.keysym.sym == SDLK_d || event.key.keysym.sym == SDLK_RIGHT)
-            xVelocity -= speed;
+        else if (event.key.keysym.sym == SDLK_d)
+            xVelocity -= 1.0;
     }
 }
 
@@ -131,49 +132,61 @@ void Player::render()
 
 void Player::move()
 {
+    // Used in cases where player is moving diagonally
+//    float normalizeX = 0, normalizeY = 0;
+//    double len = 0;
+    
     if (xVelocity != 0 || yVelocity != 0)
         isMoving = true;
     else
         isMoving = false;
     
-    if (xVelocity != 0)
-        movingX = true;
-    else
-        movingX = false;
-    
-    if (yVelocity != 0)
-        movingY = true;
-    else
-        movingY = false;
+//    if (xVelocity != 0)
+//        movingX = true;
+//    else
+//        movingX = false;
+//
+//    if (yVelocity != 0)
+//        movingY = true;
+//    else
+//        movingY = false;
     
     if (isMoving)
     {
-        if (movingX)
-        {
-            if (xVelocity < 0 && mDirection != 1)
-                mDirection = 1;
-            else if (xVelocity > 0 && mDirection != 0)
-                mDirection = 0;
-        }
-        else if (movingY)
-        {
-            if (yVelocity < 0 && mDirection != 2)
-                mDirection = 2;
-            else if (yVelocity > 0 && mDirection != 3)
-                mDirection = 3;
-        }
+//        if (movingX)
+//        {
+//            if (xVelocity < 0 && mDirection != 1)
+//                mDirection = 1;
+//            else if (xVelocity > 0 && mDirection != 0)
+//                mDirection = 0;
+//        }
+//        else if (movingY)
+//        {
+//            if (yVelocity < 0 && mDirection != 2)
+//                mDirection = 2;
+//            else if (yVelocity > 0 && mDirection != 3)
+//                mDirection = 3;
+//        }
+//
+//        if (movingX && movingY)
+//        {
+//            len = std::sqrt((std::pow(xVelocity, 2) + std::pow(yVelocity, 2)));
+//
+//            normalizeX = xVelocity / len * speed;
+//            normalizeY = yVelocity / len * speed;
+//        }
         
         // Move player along the x-axis
-        mRect.x += xVelocity;
-        
+        mRect.x += xVelocity * speed;
+            
         if (gMap.checkCollision(std::make_pair(mBlockX, mBlockY), mRect))
-            mRect.x -= xVelocity;
+            mRect.x -= xVelocity * speed;
         
         // Move player along the y-axis
-        mRect.y += yVelocity;
+        mRect.y += yVelocity * speed;
         
         if (gMap.checkCollision(std::make_pair(mBlockX, mBlockY), mRect))
-            mRect.y -= yVelocity;
+            mRect.y -= yVelocity * speed;
         
         if (!(mCurrentSprite < 7))
             mCurrentSprite = 0;
@@ -193,7 +206,7 @@ void Player::move()
             gMap.loadBlock(std::make_pair(x, y));
         }
     }
-    
+        
     updateCamera();
     ticks++;
 }

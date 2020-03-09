@@ -11,10 +11,15 @@
 
 #include <SDL_ttf.h>
 
+#include "gameEventHandler.hpp"
 #include "textureHandler.hpp"
+#include "textboxProcessor.hpp"
+#include "tileCollisionProcessor.hpp"
 #include "tile.hpp"
 #include "player.hpp"
 #include "map.hpp"
+
+// TODO: COMBINE ALL PROCESSORS INTO ONE BIG HEADER FILE OR SOMETHING BECAUSE ALL THESE INCLUDES ARE GETTING REDICULOUS!!
 
 struct ArrowKeys
 {
@@ -58,6 +63,16 @@ extern SDL_Renderer* gRenderer;
 
 // Global font that will be used for the game
 extern TTF_Font* gFont;
+
+// Game's event handler (DO NOT CONFUSE WITH PROCESSOR, LOOK AT CLASS COMMENTS FOR MORE OF AN
+// EXPLANATION (as in the comments in gameEventHandler.hpp btw))
+extern GameEventHandler eventHandler;
+
+// Game's textbox processor
+extern TextboxEventProcessor textboxProcessor;
+
+// Game's tile collision processor
+extern TileCollisionProcessor tileProcessor;
 
 // Game's player
 extern Player gPlayer;

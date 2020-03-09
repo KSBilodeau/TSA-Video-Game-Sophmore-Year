@@ -38,13 +38,13 @@ void KMap::loadMap()
         }
     }
     
-    save();
+//    save();
     
-    std::ifstream ifs("map.txt");
-    boost::archive::text_iarchive ia(ifs);
-    
-    ia >> gMap;
-    ifs.close();
+//    std::ifstream ifs("map.txt");
+//    boost::archive::text_iarchive ia(ifs);
+//    
+//    ia >> gMap;
+//    ifs.close();
 }
 
 void KMap::loadBlock(std::pair<int, int> coords)
@@ -76,6 +76,17 @@ void KMap::clearMap()
             loadBlock(std::make_pair(x, y));
 }
 
+void KMap::attachTileCollisionEvent(int &x, int &y, int &id, int &storageID, EventType eventType)
+{
+    int blockX = x - (x % BLOCK_WIDTH);
+    int blockY = y - (y % BLOCK_HEIGHT);
+    int tileX = x - (blockX * BLOCK_WIDTH), tileY = y - (blockY * BLOCK_HEIGHT);
+    
+    if (mBlockList.count(std::make_pair(blockX, blockY)) == 0)
+        loadBlock(std::make_pair(blockX, blockY));
+    
+    mBlockList.at(std::make_pair(blockX, blockY)).attachTileCollsionEvent(tileX, tileY, id, storageID, eventType);
+}
 
 void KMap::render()
 {

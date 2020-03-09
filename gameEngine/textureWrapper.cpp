@@ -5,6 +5,8 @@
 //  Created by Keegan Bilodeau on 12/30/19.
 //  Copyright © 2019 Keegan Bilodeau. All rights reserved.
 //
+#define SDL_MAIN_HANDLED
+
 #include "textureWrapper.hpp"
 #include "main.hpp"
 
@@ -89,7 +91,6 @@ bool KTexture::loadFromString(std::string text, SDL_Color textColor)
     free();
     
     // Render text to surface
-    printf("%s", text.c_str());
     SDL_Surface* loadedSurface = TTF_RenderText_Blended_Wrapped(gFont, text.c_str(), textColor, 300 * 1.776);
     if (loadedSurface == nullptr)
     {

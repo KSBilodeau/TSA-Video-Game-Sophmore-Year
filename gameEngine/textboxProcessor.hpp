@@ -42,22 +42,24 @@ struct TextboxSequence
     // All the textboxes in the textbox sequence
     std::vector<std::shared_ptr<Textbox>> textboxes;
     
+    // Renders the current texture
     void render()
     {
         textboxes[currentTextboxID]->render();
     }
     
+    // Increments the current texure flag
     void increment()
     {
         if (currentTextboxID < numOfTextboxes - 1)
         {
             currentTextboxID++;
-            printf("Hey wait a sec!\n");
         }
         else
             complete = true;
     }
     
+    // Decrements the current texture flag
     void decrement()
     {
         if (currentTextboxID > 0)
@@ -94,14 +96,15 @@ public:
     void createTextboxEvent(std::vector<int> textboxIDs);
     
     // Adds textbox to map
-    void registerTextbox(std::shared_ptr<TextboxSequence> &textbox);
+    void registerTextboxSequence(std::shared_ptr<TextboxSequence> &textbox);
     
     // Runs a sequence of textboxes
     void runTextboxSequence(int sequenceID);
     
     // Updates the textbox and handles mousclicks
-    void updateCurrentEvent(SDL_Event &event);
+    bool updateCurrentEvent(SDL_Event &event);
     
+    // Renders whatever current sequence is set to
     void renderCurrentEvent();
     
 private:

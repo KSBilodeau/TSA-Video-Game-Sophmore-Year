@@ -35,6 +35,9 @@ public:
     // Render entire block
     void render();
     
+    // Attach tile collision event
+    void attachTileCollsionEvent(int x, int y, int &id, int &storageID, EventType eventType);
+    
     // Set block position
     void setBlockPosition(int x, int y);
     
